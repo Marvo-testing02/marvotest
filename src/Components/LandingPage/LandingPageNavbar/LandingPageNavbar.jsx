@@ -39,8 +39,16 @@ function LandingPageNavbar() {
             }}
             className='w-full space-x-8 flex justify-center fixed'>
             <div
-                style={{ marginTop: '1.5rem' }}
-                className='w-full max-w-[1920px] bg-white flex items-center justify-between rounded-xl h-[72px] shadow-[0_10px_30px_rgba(0,0,0,0.3)] px-4 sm:px-6 lg:px-8  '
+                style={{
+                    marginTop: '1.5rem',
+                    boxShadow: `
+      0px 4px 9px 0px #0330771A,
+      0px 16px 16px 0px #03307717,
+      0px 36px 22px 0px #0330770D,
+      0px 64px 26px 0px #03307703,
+      0px 101px 28px 0px #03307700
+    ` }}
+                className='w-full max-w-[1920px] bg-white flex items-center justify-between rounded-xl h-[72px]  px-4 sm:px-6 lg:px-8  '
             >
                 {/* Logo */}
                 <div>
