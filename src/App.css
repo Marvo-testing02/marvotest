@@ -1,0 +1,25 @@
+@keyframes glowThenUnglow {
+  0% {
+    border: 2px solid #31D6FF;
+    background-color: rgba(49, 214, 255, 0.2);
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  50% {
+    border: 2px solid transparent;
+    transform: scale(1.01);
+    opacity: 0.8;
+  }
+  100% {
+    border: 2px solid transparent;
+    background-color: transparent;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.glow-animation {
+  animation: glowThenUnglow 0.8s ease-out forwards;
+  border-radius: 4px;
+  will-change: transform, opacity, border, background-color;
+}
