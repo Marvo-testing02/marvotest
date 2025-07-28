@@ -14,6 +14,7 @@ import logo from '../assets/logo/marvo-logo.png';
 import blueBgImage from '../assets/background/BackgroundPage.png';
 import mapImage from '../assets/background/map-background.png';
 import illustration from '../assets/illustrations/welcomeIllustration.png';
+import { motion } from 'framer-motion';
 
 const WelcomePage = () => {
   const [email, setEmail] = useState('');
