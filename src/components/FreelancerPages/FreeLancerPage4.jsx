@@ -32,13 +32,7 @@ const FreelancerPage4 = () => {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5 }}
-            style={{ fontFamily: 'Inter, sans-serif' }}
-        >
+        
             <Box
                 sx={{
                     minHeight: '88vh',
@@ -48,6 +42,8 @@ const FreelancerPage4 = () => {
                     overflow: 'hidden',
                     px: { xs: 2, md: 8 },
                     py: { xs: 4, md: 6 },
+                    fontFamily: 'Inter, sans-serif'
+
                 }}
             >
                 <Box component="img" src={logo} alt="Logo" sx={{ position: 'absolute', top: 20, left: 20, width: 120, zIndex: 10 }} />
@@ -148,7 +144,12 @@ const FreelancerPage4 = () => {
                         {step.num}
                     </Box>
                 ))}
-
+<motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+            >
                 <Box
                     sx={{
                         display: 'flex',
@@ -240,8 +241,9 @@ const FreelancerPage4 = () => {
                         }}
                     />
                 </Box>
+                </motion.div>
             </Box>
-        </motion.div>
+        
     );
 };
 
