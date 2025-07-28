@@ -183,7 +183,11 @@ const HeroSocialCircle = () => {
       <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
         Stop Wasting Time. 
       <span className="relative inline-block">
-    <span className="relative z-10 text-black">Start Getting Results.</span>
+    {/* <span className="relative z-10 text-black">Start Getting Results.</span> */}
+    <span className="relative inline-block">
+            <span className="relative z-10 text-black"> Start Getting Results.</span>
+            <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
+          </span>
     <span className="absolute inset-0 -skew-x-12 bg-bg-blue-300  z-0"></span>
   </span>
       </h1>

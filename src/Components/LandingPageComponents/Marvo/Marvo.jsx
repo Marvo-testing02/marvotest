@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import robert from "../../../assets/images/robert.png";
 import background_circle from "../../../assets/images/background_circle.png";
 import { motion } from "framer-motion";
-import EastIcon from '@mui/icons-material/East';
+import EastIcon from "@mui/icons-material/East";
 
 export default function Marvo() {
   return (
@@ -16,24 +16,26 @@ export default function Marvo() {
         </div>
 
         <div className="z-10 max-w-7xl w-full flex flex-col items-center justify-between gap-12">
-          <div className="w-full lg:text-center sm:text-left">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black leading-tight whitespace-nowrap">
+          <div className="w-full text-left lg:text-center px-4 sm:px-0">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black leading-tight whitespace-normal">
               So, What Exactly is{" "}
               <span className="relative inline-block px-2 py-2">
-                <span className="relative z-10 text-black-600 "> MARVO?</span>
+                <span className="relative z-10 text-black-600"> MARVO?</span>
                 <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
               </span>
             </h2>
           </div>
 
           {/* Responsive Stack on Mobile */}
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-13 w-full items-center justify-center">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-13 md:w-full items-center justify-center">
             {/* Text Content */}
             <div className="text-left w-full sm:w-[90%] md:w-[648px]">
               <div>
                 <p className="text-lg text-gray-700 mt-4 font-medium">
                   Think of MARVO as your{" "}
-                  <span className="font-bold">AI-powered marketing manager</span>{" "}
+                  <span className="font-bold">
+                    AI-powered marketing manager
+                  </span>{" "}
                   that never takes a day off. <br />
                   Built by entrepreneurs (not just coders), it solves one major
                   headache:
@@ -44,16 +46,20 @@ export default function Marvo() {
                 </p>
                 <ul className="list-disc text-gray-800 flex flex-col font-semibold lg:font-normal gap-5 md:gap-0 lg:gap-0 justify-center mt-4 ml-4">
                   <li className="flex items-center gap-2">
-                    <span className="text-[#1979FF] mt-1">●</span> Multi-platform messaging
+                    <span className="text-[#1979FF] mt-1">●</span>{" "}
+                    Multi-platform messaging
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#1979FF] mt-1">●</span> Smart follow-ups & replies
+                    <span className="text-[#1979FF] mt-1">●</span> Smart
+                    follow-ups & replies
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#1979FF] mt-1">●</span> Import your leads via CSV and start in minutes
+                    <span className="text-[#1979FF] mt-1">●</span> Import your
+                    leads via CSV and start in minutes
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-[#1979FF] mt-1">●</span> Built for people who don’t want complex tech
+                    <span className="text-[#1979FF] mt-1">●</span> Built for
+                    people who don’t want complex tech
                   </li>
                 </ul>
                 <p className="mt-4 text-gray-700">
@@ -61,7 +67,10 @@ export default function Marvo() {
                   owner — this is built for you.
                 </p>
                 <button className="w-full sm:w-[184px] h-[49px] mt-6 bg-blue-600 text-white px-6 py-3 rounded-[10px] font-semibold text-[20px] flex items-center justify-center hover:bg-blue-700 transition duration-300">
-                  Learn more  <span className='ml-2'><EastIcon /></span>
+                  Learn more{" "}
+                  <span className="ml-2">
+                    <EastIcon />
+                  </span>
                 </button>
               </div>
             </div>
@@ -88,7 +97,7 @@ export default function Marvo() {
               </style>
 
               {/* Background Circle */}
-              <div className="ml-4 absolute top-0 left-0 w-[250px] sm:w-[300px] h-[280px]">
+              <div className="ml-4 h-[100%] absolute top-0 left-0 w-[250px] sm:w-[300px] md:h-[280px] ">
                 <img
                   src={background_circle}
                   alt="background circles"
