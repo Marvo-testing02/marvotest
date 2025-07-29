@@ -66,63 +66,73 @@ const SignupPage = () => {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5 }}
-          
+        <Box
+            sx={{
+                minHeight: '100vh',
+                backgroundImage: `url(${blueBgImage})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center'
+            }}
         >
             <Box
                 sx={{
                     minHeight: '100vh',
-                    backgroundImage: `url(${blueBgImage})`,
-                    backgroundSize: 'cover',
+                    backgroundImage: `url(${mapImage})`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
+                    backgroundPosition: 'left',
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
 
                 }}
             >
+
                 <Box
+
                     sx={{
-                        minHeight: '100vh',
-                        backgroundImage: `url(${mapImage})`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'left',
-                        position: 'relative',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(0, 31, 92, 0.3)',
+                        zIndex: 1,
+
                     }}
+
+                />
+
+
+                <Box
+                    component="img"
+                    src={logo}
+                    alt="Marvo Logo"
+                    sx={{
+                        position: 'absolute',
+                        top: 20,
+                        left: 20,
+                        width: 150,
+                        height: 37.5,
+                        zIndex: 2,
+
+                    }}
+                />
+                <motion.div
+
+                    initial={{ opacity: 0, x: 500 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{
+                        type: 'spring',
+                        stiffness: 100,
+                        damping: 15,
+                        mass: 0.5
+                    }}
+                    style={{ zIndex: 2, width: '100%', maxWidth: 900 }}
+
                 >
-
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            backgroundColor: 'rgba(0, 31, 92, 0.3)',
-                            zIndex: 1
-                        }}
-                    />
-
-
-                    <Box
-                        component="img"
-                        src={logo}
-                        alt="Marvo Logo"
-                        sx={{
-                            position: 'absolute',
-                            top: 20,
-                            left: 20,
-                            width: 150,
-                            height: 37.5,
-                            zIndex: 2
-                        }}
-                    />
-
 
                     <Box
                         sx={{
@@ -140,6 +150,7 @@ const SignupPage = () => {
                     >
 
                         <Box
+
                             sx={{
                                 width: { xs: '40%', md: '40%' },
                                 backgroundColor: '#fff',
@@ -147,13 +158,15 @@ const SignupPage = () => {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                py: { xs: 2, md: 0 }
+                                py: { xs: 2, md: 0 },
+                                display: { xs: 'none', sm: 'block' }
                             }}
                         >
                             <Box
                                 component="img"
                                 src={illustration}
                                 alt="Illustration"
+
                                 sx={{ width: '100%', maxWidth: 500 }}
                             />
                         </Box>
@@ -234,8 +247,9 @@ const SignupPage = () => {
                             </Typography>
 
 
-                            <Grid container spacing={7.5} sx={{ mb: 1 }}>
-                                <Grid item xs={6}>
+                            <Grid container spacing={2.6} sx={{ mb: 1 }}>
+                                <Grid item xs={12} sm={6} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+
                                     <Typography sx={{ fontFamily: 'Inter, sans-serif', fontWeight: 'bold', color: 'black' }}>
                                         First Name
                                     </Typography>
@@ -254,7 +268,8 @@ const SignupPage = () => {
                                         }}
                                     />
                                 </Grid>
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={6} sx={{ width: { xs: '100%', sm: 'auto' } }}>
+
                                     <Typography sx={{ fontFamily: 'Inter, sans-serif', fontWeight: 'bold', color: 'black' }}>
                                         Last Name
                                     </Typography>
@@ -363,9 +378,10 @@ const SignupPage = () => {
                             </Box>
                         </Box>
                     </Box>
-                </Box>
+                </motion.div>
             </Box>
-        </motion.div>
+        </Box>
+
     );
 };
 

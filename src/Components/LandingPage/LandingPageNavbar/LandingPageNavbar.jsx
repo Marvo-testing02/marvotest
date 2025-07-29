@@ -121,7 +121,7 @@ function LandingPageNavbar() {
                         <span
                             style={{ marginRight: '0px' }}
                             className="z-10"
-                            onClick={() => navigate('/login')}>Get a DEMO</span>
+                            onClick={() => navigate('/welcome')}>Get a DEMO</span>
 
                         {/* Icon that fades & slides in */}
                         <span className="absolute right-2 flex items-center  opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-in-out text-sm z-0 ">
@@ -132,6 +132,7 @@ function LandingPageNavbar() {
                     {/* Start Free Button */}
                     <button
                         style={{ width: '116px' }}
+                        onClick={() => navigate('/login')}
                         className="bg-[#1A6DF6] text-white h-10 rounded-lg text-md font-medium hover:bg-blue-700 transition px-3"
                     >
                         Start free
@@ -160,10 +161,12 @@ function LandingPageNavbar() {
                     <div className="mt-auto flex flex-col gap-3">
                         <button
                             className="w-full border  border-blue-600 text-blue-600 h-10 rounded-lg font-medium hover:bg-blue-50 transition"
-                            onClick={() => navigate('/login')}>
+                            onClick={() => navigate('/welcome')}>
                             Get a DEMO
                         </button>
-                        <button className="w-full bg-[#1A6DF6] text-white h-10 rounded-lg font-medium hover:bg-blue-700 transition">
+                        <button
+                            onClick={() => navigate('/login')}
+                            className="w-full bg-[#1A6DF6] text-white h-10 rounded-lg font-medium hover:bg-blue-700 transition">
                             Start free
                         </button>
                     </div>
