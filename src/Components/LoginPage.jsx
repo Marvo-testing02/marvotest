@@ -48,6 +48,9 @@ const LoginPage = () => {
 
         if (!valid) return;
 
+        const Email = email.split('@')[0];
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('Email', Email);
         navigate('/signup', { state: { email } });
     };
 

@@ -33,6 +33,10 @@ import ProfessionalPage3 from "./Components/OtherProfessional/ProfessionalPage3.
 import ProfessionalPage4 from "./Components/OtherProfessional/ProfessionalPage4.jsx"
 import ProfessionalPage5 from "./Components/OtherProfessional/ProfessionalPage5.jsx"
 import ProfessionalPage6 from "./Components/OtherProfessional/ProfessionalPage6.jsx"
+import DashboardLayout from './Components/Dashboard/DashboardLayout.jsx'
+import ProtectedRoute from './Components/ProtactedRoute/ProtectedRoute.jsx'
+import DasboardContact from './Components/Dashboard/DashboardComponents/Contact/DasboardContact.jsx'
+import MainDashboard from './Components/Dashboard/MainDashboard.jsx'
 
 
 
@@ -74,6 +78,16 @@ function App() {
         <Route path="/otherprofessional/page4" element={<ProfessionalPage4 />} />
         <Route path="/otherprofessional/page5" element={<ProfessionalPage5 />} />
         <Route path="/otherprofessional/page6" element={<ProfessionalPage6 />} />
+
+
+        {/* Dashboard Routes */}
+        <Route path="/dashboard" element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route index element={<MainDashboard />} />
+            <Route path="contact" element={<DasboardContact />} />
+          </Route>
+        </Route>
+
       </Routes>
     </>
   )

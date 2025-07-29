@@ -121,7 +121,7 @@ function LandingPageNavbar() {
                         <span
                             style={{ marginRight: '0px' }}
                             className="z-10"
-                            onClick={() => navigate('/welcome')}>Get a DEMO</span>
+                            onClick={() => navigate('/dashboard')}>Get a DEMO</span>
 
                         {/* Icon that fades & slides in */}
                         <span className="absolute right-2 flex items-center  opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-in-out text-sm z-0 ">
