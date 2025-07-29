@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
 import logo from '../../assets/logo/BlueLogo.png';
 import plane from '../../assets/effects/plane.png';
-import dottedLine from '../../assets/Ways/ThreeWay.png';
+import dottedLine from '../../assets/Ways/ThreeWay.svg';
 import sideIllustration from '../../assets/illustrations/invite.svg';
 import '../../App.css';
 
@@ -28,27 +28,37 @@ const BusinessPage3 = () => {
 
         <Box
             sx={{
-                minHeight: '88vh',
+                minHeight: '100vh',
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: 'cover',
                 position: 'relative',
                 overflow: 'hidden',
-                px: { xs: 2, md: 8 },
-                py: { xs: 4, md: 6 },
+                px: { xs: 2, sm: 4, md: 8 },
+                py: { xs: 4, sm: 5, md: 6 },
                 fontFamily: 'Inter, sans-serif'
-
-
             }}
         >
             <Box component="img" src={logo} alt="Logo" sx={{ position: 'absolute', top: 20, left: 20, width: 120, zIndex: 10 }} />
 
+
+
             <Box sx={{ position: 'absolute', top: 43, left: 172, width: 485, height: 124, zIndex: 5 }}>
                 <Box component="img" src={dottedLine} width="100%" />
             </Box>
-
-            <Box sx={{ position: 'absolute', top: 45, left: 528.18, width: 70, height: 76, transform: 'rotate(-20.1deg)', zIndex: 6 }}>
-                <Box component="img" src={plane} width="100%" />
-            </Box>
+            <motion.div
+                initial={{ top: 95.99, left: 370 }}
+                animate={{ top: 45, left: 528.18 }}
+                transition={{ duration: 0.5 }}
+                style={{
+                    position: 'absolute',
+                    width: 70,
+                    height: 76,
+                    transform: 'rotate(-30.53deg)',
+                    zIndex: 6,
+                }}
+            >
+                <img src={plane} alt="plane" width="100%" />
+            </motion.div>
 
             <Box
                 sx={{

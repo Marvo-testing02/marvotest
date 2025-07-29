@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
 import logo from '../../assets/logo/BlueLogo.png';
 import plane from '../../assets/effects/plane.png';
-import dottedLine from '../../assets/Ways/TwoWay.png';
+import dottedLine from '../../assets/Ways/TwoWay.svg';
 import sideIllustration from '../../assets/illustrations/completedSteps.svg';
 import '../../App.css';
 
@@ -35,13 +35,13 @@ const ProfessionalPage2 = () => {
 
         <Box
             sx={{
-                minHeight: '88vh',
+                minHeight: '100vh',
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: 'cover',
                 position: 'relative',
                 overflow: 'hidden',
-                px: { xs: 2, md: 8 },
-                py: { xs: 4, md: 6 },
+                px: { xs: 2, sm: 4, md: 8 },
+                py: { xs: 4, sm: 5, md: 6 },
                 fontFamily: 'Inter, sans-serif'
 
             }}
@@ -52,9 +52,23 @@ const ProfessionalPage2 = () => {
                 <Box component="img" src={dottedLine} width="100%" />
             </Box>
 
-            <Box sx={{ position: 'absolute', top: 119.99, left: 327.55, width: 70, height: 76, transform: 'rotate(-30.53deg)', zIndex: 6 }}>
-                <Box component="img" src={plane} width="100%" />
-            </Box>
+            <motion.div
+                initial={{ left: 172, top: 92 }}
+                animate={{ left: 410, top: 100 }}
+                transition={{
+                    duration: 0.5,
+                    ease: [0.42, 0, 0.58, 1],
+                }}
+                style={{
+                    position: 'absolute',
+                    width: 70,
+                    height: 76,
+                    transform: 'rotate(-20deg)',
+                    zIndex: 6,
+                }}
+            >
+                <img src={plane} alt="plane" width="100%" />
+            </motion.div>
 
             <Box
                 sx={{

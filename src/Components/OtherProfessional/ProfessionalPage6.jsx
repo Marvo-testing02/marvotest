@@ -36,13 +36,13 @@ const ProfessionalPage6 = () => {
 
         <Box
             sx={{
-                minHeight: '88vh',
+                minHeight: '100vh',
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: 'cover',
                 position: 'relative',
                 overflow: 'hidden',
-                px: { xs: 2, md: 8 },
-                py: { xs: 4, md: 6 },
+                px: { xs: 2, sm: 4, md: 8 },
+                py: { xs: 4, sm: 5, md: 6 },
                 fontFamily: 'Inter, sans-serif'
 
             }}
@@ -57,9 +57,20 @@ const ProfessionalPage6 = () => {
                 <Box component="img" src={cloud} width="100%" />
             </Box>
 
-            <Box sx={{ position: 'absolute', top: 130, left: 1150.63, width: 70, height: 76, transform: 'rotate(-25.43deg)', zIndex: 6 }}>
-                <Box component="img" src={plane} width="100%" />
-            </Box>
+            <motion.div
+                initial={{ top: 12, left: 882 }}
+                animate={{ top: 130, left: 1150.63 }}
+                transition={{ duration: 0.5 }}
+                style={{
+                    position: 'absolute',
+                    width: 70,
+                    height: 76,
+                    transform: 'rotate(-30.53deg)',
+                    zIndex: 6,
+                }}
+            >
+                <img src={plane} alt="plane" width="100%" />
+            </motion.div>
 
             <Box sx={{ position: 'absolute', top: 110, left: 720, width: 40, height: 20, backgroundColor: 'white', zIndex: 5 }} />
 

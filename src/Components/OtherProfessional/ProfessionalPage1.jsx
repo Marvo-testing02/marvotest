@@ -6,7 +6,7 @@ import bgImage from '../../assets/background/backgroundRole.png';
 import logo from '../../assets/logo/BlueLogo.png';
 import plane from '../../assets/effects/plane.png';
 import airSpiral from '../../assets/effects/air.png';
-import dottedLine from '../../assets/Ways/Oneway.png';
+import dottedLine from '../../assets/Ways/Oneway.svg';
 import sideIllustration from '../../assets/illustrations/www.svg';
 import '../../App.css';
 
