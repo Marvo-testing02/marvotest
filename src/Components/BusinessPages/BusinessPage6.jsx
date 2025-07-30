@@ -35,27 +35,39 @@ const BusinessPage6 = () => {
 
         <Box
             sx={{
-                minHeight: '88vh',
+                minHeight: '100vh',
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: 'cover',
                 position: 'relative',
                 overflow: 'hidden',
-                px: { xs: 2, md: 8 },
-                py: { xs: 4, md: 6 },
+                px: { xs: 2, sm: 4, md: 8 },
+                py: { xs: 4, sm: 5, md: 6 },
                 fontFamily: 'Inter, sans-serif'
 
             }}
         >
             <Box component="img" src={logo} alt="Logo" sx={{ position: 'absolute', top: 20, left: 20, width: 120, zIndex: 10 }} />
 
+            
             <Box sx={{ position: 'absolute', top: 43, left: 172, width: 1025, height: 124, zIndex: 5 }}>
-                <Box component="img" src={dottedLine} width="100%" />
-            </Box>
+                            <Box component="img" src={dottedLine} width="100%" />
+                        </Box>
 
-            <Box sx={{ position: 'absolute', top: 130, left: 1150.63, width: 70, height: 76, transform: 'rotate(-25.43deg)', zIndex: 6 }}>
-                <Box component="img" src={plane} width="100%" />
-            </Box>
 
+            <motion.div
+                initial={{ top: 12, left: 882 }}
+                animate={{ top: 130, left: 1150.63 }}
+                transition={{ duration: 0.5 }}
+                style={{
+                    position: 'absolute',
+                    width: 70,
+                    height: 76,
+                    transform: 'rotate(-30.53deg)',
+                    zIndex: 6,
+                }}
+            >
+                <img src={plane} alt="plane" width="100%" />
+            </motion.div>
             <Box sx={{ position: 'absolute', top: 110, left: 720, width: 40, height: 20, backgroundColor: 'white', zIndex: 5 }} />
 
             {[1, 2, 3, 4, 5, 7].map((step, i) => {
