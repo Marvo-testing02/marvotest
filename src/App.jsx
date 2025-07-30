@@ -37,7 +37,7 @@ import DashboardLayout from './Components/Dashboard/DashboardLayout.jsx'
 import ProtectedRoute from './Components/ProtactedRoute/ProtectedRoute.jsx'
 import DasboardContact from './Components/Dashboard/DashboardComponents/Contact/DasboardContact.jsx'
 import MainDashboard from './Components/Dashboard/MainDashboard.jsx'
-
+import PipelinePage from './Pages/DashboardPage/PipelinePage.jsx'
 
 
 function App() {
@@ -87,6 +87,7 @@ function App() {
             <Route path="contact" element={<DasboardContact />} />
           </Route>
         </Route>
+        <Route path="/pipeline" element={<PipelinePage />} />
 
       </Routes>
     </>
