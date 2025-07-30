@@ -13,7 +13,7 @@ function Navbar() {
                         sx={{
                             width: { xs: '17ch', sm: '25ch', md: '25ch', lg: '290px' },
                             '& .MuiOutlinedInput-root': {
-                                borderRadius: '12px',
+                                borderRadius: '8px',
                                 fontFamily: 'Roboto',
                                 fontWeight: 400,
                                 fontStyle: 'normal',

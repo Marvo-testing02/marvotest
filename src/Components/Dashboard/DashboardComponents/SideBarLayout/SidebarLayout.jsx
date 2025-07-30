@@ -71,7 +71,7 @@ const Drawer = styled(MuiDrawer, {
         ...openedMixin(theme),
         '& .MuiDrawer-paper': {
             ...openedMixin(theme),
-            height: '100%', // ✅ Make paper 100% of parent, not vh
+            height: '100%', 
         },
     }),
     ...(!open && {

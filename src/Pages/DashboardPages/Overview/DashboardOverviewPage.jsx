@@ -18,16 +18,10 @@ import {
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
+    PieChart, Pie, Cell,
+    Legend,
 } from 'recharts';
 
-
-const campaignEngagementData = [
-    { name: 'Product ', engagement: 85 },
-    { name: 'Event Invites', engagement: 70 },
-    { name: 'Newsletter', engagement: 65 },
-    { name: 'Re-Engagement ', engagement: 90 },
-    { name: 'Other', engagement: 40 },
-];
 const data = [
     { label: 'Total Contacts', value: '12.6K', change: 3.2 },
     { label: 'New Leads Today', value: '865', change: 5.4 },
@@ -48,6 +42,16 @@ const chartData = Array.from({ length: 30 }, (_, index) => ({
     replies: Math.floor(20 + Math.sin(index / 3) * 10 + Math.random() * 5),
 }));
 
+const COLORS = ['#4A739C', '#88BBD6', '#B6D8F2', '#D6E6F2', '#EDF6FF'];
+
+
+const campaignEngagementData = [
+    { name: 'Product', engagement: 400 },
+    { name: 'Event Invites', engagement: 300 },
+    { name: 'Newsletter', engagement: 250 },
+    { name: 'Re-Engagement', engagement: 200 },
+    { name: 'Other', engagement: 150 },
+];
 const CustomBar = (props) => {
     const { x, y, width, height } = props;
 
@@ -90,6 +94,17 @@ const usageData = [
     { city: 'Hyderabad', coords: [17.3850, 78.4867], users: 270 },
 
 ];
+
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
+    const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
+    return (
+        <text x={x} y={y} fill="black" textAnchor="middle" dominantBaseline="central" fontSize={14}>
+            {`${(percent * 100).toFixed(0)}%`}
+        </text>
+    );
+};
 
 function DashboardOverviewPage() {
     return (
@@ -240,7 +255,7 @@ function DashboardOverviewPage() {
 
 
             {/* Most Engaged Campaign Types */}
-            <Box className="mt-10 bg-[#F1F8FF]  w-full">
+            {/* <Box className="mt-10 bg-[#F1F8FF]  w-full">
                 <Typography sx={{ fontSize: '22px', fontWeight: 700 }} className="mb-2">
                     Most Engaged Campaign Types
                 </Typography>
@@ -278,11 +293,58 @@ function DashboardOverviewPage() {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
+            </Box> */}
+
+            <Box className="mt-10 bg-[#F1F8FF] w-full px-4 py-6 rounded-lg">
+                <Typography sx={{ fontSize: '22px', fontWeight: 700 }} className="mb-2">
+                    Most Engaged Campaign Types
+                </Typography>
+                <Typography sx={{ fontSize: 18, mt: 2 }} className="text-sm text-black font-bold mb-4">
+                    Campaign Engagement
+                </Typography>
+
+                <div className="w-full h-[320px] md:h-[400px]">
+                    <ResponsiveContainer style={{ outline: 'none' }} width="100%" height="100%">
+                        <PieChart>
+                            <Pie
+                                data={campaignEngagementData}
+                                cx="20%"
+                                cy="50%"
+                                labelLine={false}
+                                label={renderCustomizedLabel}
+                                outerRadius={170}
+                                innerRadius={70}
+                                dataKey="engagement"
+                            >
+                                {campaignEngagementData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip
+                                contentStyle={{
+                                    backgroundColor: '#F2F9FF',
+                                    borderRadius: 12,
+                                    border: '1px solid #D6E6F2',
+                                    fontWeight: 600,
+                                    color: '#000',
+                                }}
+                            />
+                            <Legend
+
+                                layout="vertical"
+                                align="left"
+                                verticalAlign="bottom"
+                                iconType="circle"
+                                wrapperStyle={{ fontSize: 14, fontWeight: 500, }}
+                            />
+                        </PieChart>
+                    </ResponsiveContainer>
+                </div>
             </Box>
 
 
             {/* Active Countries Heatmap / Usage by Location */}
-            <Box className="mt-10  bg-[#F1F8FF]  rounded-xl w-full">
+            <Box className="mt-10 mb-3  bg-[#F1F8FF]  rounded-xl w-full">
                 <Typography sx={{ fontSize: '22px', mb: 2, fontWeight: 700 }} className="mb-4">
                     Active Countries Heatmap
                 </Typography>

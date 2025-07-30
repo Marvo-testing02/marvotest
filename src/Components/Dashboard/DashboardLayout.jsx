@@ -15,6 +15,7 @@ import { Typography } from '@mui/material';
 import DashboardOverviewPage from '../../Pages/DashboardPages/Overview/DashboardOverviewPage';
 import DashboardMyTaskPage from '../../Pages/DashboardPages/MyTask/DashboardMyTaskPage';
 import useDashboardStore from '../../Store/useDashboardStore/useDashboardStore';
+import EastIcon from '@mui/icons-material/East';
 
 export default function DashboardLayout() {
     const [value, setValue] = useState('1');
@@ -27,10 +28,33 @@ export default function DashboardLayout() {
 
     const isDashboardRoute = location.pathname === '/dashboard';
 
+
+
+
+
+    useEffect(() => {
+        const path = location.pathname;
+        const pathToTitleMap = {
+            '/dashboard': 'Dashboard',
+            '/dashboard/my-task': 'My Task',
+            '/dashboard/documents': 'Documents',
+            '/dashboard/team': 'Team',
+            '/dashboard/reports': 'Reports',
+            '/dashboard/admin': 'Admin',
+        };
+
+        const matchedTitle = pathToTitleMap[path];
+        if (matchedTitle) {
+            setCurrentPageTitle(matchedTitle);
+        }
+    }, [location.pathname, setCurrentPageTitle]);
+
+
+
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
 
-        // Set page title based on tab
         const tabTitleMap = {
             '1': 'Dashboard',
             '2': 'My Task',
@@ -42,7 +66,6 @@ export default function DashboardLayout() {
         const pageTitle = tabTitleMap[newValue] || 'Dashboard';
         setCurrentPageTitle(pageTitle);
 
-        // Navigate to /dashboard if not already there
         if (!isDashboardRoute) {
             navigate('/dashboard');
         }
@@ -57,80 +80,96 @@ export default function DashboardLayout() {
                 <TabContext value={isDashboardRoute ? value : ''}>
                     {/* Tab List + Filters */}
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Box className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mt-3">
-                            <TabList
-                                onChange={handleChange}
-                                aria-label="dashboard tabs"
-                                className="overflow-x-auto whitespace-nowrap"
-                                sx={{
-                                    maxWidth: '100%',
-                                    '.MuiTabs-flexContainer': {
-                                        flexWrap: 'nowrap',
-
-                                    },
-                                }}
-                            >
-                                {[
-                                    ['Overview', '1'],
-                                    ['Tasks', '2'],
-                                    ['Documents', '3'],
-                                    ['Team', '4'],
-                                    ['Reports', '5'],
-                                    ['Admin', '6'],
-                                    ['...', '7'],
-                                ].map(([label, val]) => (
-                                    <Tab
-                                        disableRipple
-                                        key={val}
-                                        label={label}
-                                        value={val}
-                                        sx={{
-                                            fontWeight: 600,
-                                            backgroundColor: 'transparent',
-                                            textTransform: 'none',
-                                            minWidth: 90,
-
-                                            '&.Mui-selected': isDashboardRoute
-                                                ? {
-                                                    borderBottom: '2px solid #1976d2',
-                                                }
-                                                : {},
-                                            '&:hover': {
+                        <Box className="flex flex-col gap-4 md:flex-row md:items-center lg:items-end  md:justify-between mt-3">
+                            <Box sx={{ scrollbarWidth: 'none' }} className="w-full overflow-x-auto ">
+                                <TabList
+                                    onChange={handleChange}
+                                    aria-label="dashboard tabs"
+                                    sx={{
+                                        minWidth: '600px',
+                                        '.MuiTabs-flexContainer': {
+                                            flexWrap: 'nowrap',
+                                        },
+                                    }}
+                                >
+                                    {[
+                                        ['Overview', '1'],
+                                        ['Tasks', '2'],
+                                        ['Documents', '3'],
+                                        ['Team', '4'],
+                                        ['Reports', '5'],
+                                        ['Admin', '6'],
+                                        ['...', '7'],
+                                    ].map(([label, val]) => (
+                                        <Tab
+                                            disableRipple
+                                            key={val}
+                                            label={label}
+                                            value={val}
+                                            sx={{
+                                                fontWeight: 600,
                                                 backgroundColor: 'transparent',
-                                            },
-                                        }}
-                                    />
-                                ))}
-                            </TabList>
+                                                textTransform: 'none',
+                                                minWidth: 90,
+                                                whiteSpace: 'nowrap',
+                                                '&.Mui-selected': isDashboardRoute
+                                                    ? {
+                                                        borderBottom: '2px solid #1976d2',
+                                                    }
+                                                    : {},
+                                                '&:hover': {
+                                                    backgroundColor: 'transparent',
+                                                },
+                                            }}
+                                        />
+                                    ))}
+                                </TabList>
+                            </Box>
 
                             {/* Filters only on Dashboard tab */}
-                            {currentPageTitle === "Dashboard" && isDashboardRoute && (
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <Box className="  flex flex-wrap gap-1 items-center">
+                            {currentPageTitle === 'Dashboard' && isDashboardRoute && (
+                                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                    <Box sx={{ width: '70%' }} className="flex flex-col sm:flex-row flex-wrap gap-0 items-start sm:items-center sm:justify-end  sm:w-auto">
                                         <MobileDatePicker
-                                            label="Start Date"
                                             value={startDate}
                                             onChange={setStartDate}
                                             slotProps={{
                                                 textField: {
-                                                    variant: 'standard',
-                                                    size: 'large',
-
-
+                                                    variant: 'outlined',
+                                                    size: 'small',
                                                     sx: {
                                                         bgcolor: 'white',
-                                                        '& .MuiOutlinedInput-root': {
-                                                            borderRadius: 1,
-                                                            backgroundColor: 'white',
-                                                            border:'none'
+                                                        width: '190px',
+                                                        height: '56px',
+                                                        px: 1,
+                                                        py: 0,
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        '& .MuiInputBase-root': {
+                                                            height: '32px',
+                                                            minHeight: '32px',
+                                                            fontSize: '14px',
+                                                        },
+                                                        '& fieldset': {
+                                                            border: 'none',
+                                                        },
+                                                        '&:hover fieldset': {
+                                                            border: 'none',
+                                                        },
+                                                        '&.Mui-focused fieldset': {
+                                                            border: 'none',
                                                         },
                                                     },
                                                 },
                                             }}
                                         />
-                                        <Typography>to</Typography>
+
+
+
+                                        <Typography className="hidden sm:inline bg-[#C1C7CD] p-4 ">
+                                            <EastIcon sx={{ color: '#697077' }} />
+                                        </Typography>
                                         <MobileDatePicker
-                                            label="End Date"
                                             value={endDate}
                                             onChange={setEndDate}
                                             slotProps={{
@@ -139,9 +178,25 @@ export default function DashboardLayout() {
                                                     size: 'small',
                                                     sx: {
                                                         bgcolor: 'white',
-                                                        '& .MuiOutlinedInput-root': {
-                                                            borderRadius: 1,
-                                                            backgroundColor: 'white',
+                                                        width: '190px',
+                                                        height: '56px',
+                                                        px: 1,
+                                                        py: 0,
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        '& .MuiInputBase-root': {
+                                                            height: '32px',
+                                                            minHeight: '32px',
+                                                            fontSize: '14px',
+                                                        },
+                                                        '& fieldset': {
+                                                            border: 'none',
+                                                        },
+                                                        '&:hover fieldset': {
+                                                            border: 'none',
+                                                        },
+                                                        '&.Mui-focused fieldset': {
+                                                            border: 'none',
                                                         },
                                                     },
                                                 },
@@ -153,7 +208,7 @@ export default function DashboardLayout() {
                         </Box>
                     </Box>
 
-                    {/* Conditionally show TabPanels or Route content */}
+                    {/* TabPanels or Route Outlet */}
                     {isDashboardRoute ? (
                         <>
                             <TabPanel sx={{ p: 0 }} value="1">
@@ -162,12 +217,15 @@ export default function DashboardLayout() {
                             <TabPanel sx={{ p: 0 }} value="2">
                                 <DashboardMyTaskPage />
                             </TabPanel>
-                            <TabPanel sx={{ p: 0 }} value="3">Item Three</TabPanel>
+                            <TabPanel sx={{ p: 0 }} value="3">
+                                Item Three
+                            </TabPanel>
                         </>
                     ) : (
                         <Outlet />
                     )}
                 </TabContext>
+
             </div>
         </SidebarLayout>
     );
