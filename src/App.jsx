@@ -37,6 +37,7 @@ import DashboardLayout from './Components/Dashboard/DashboardLayout.jsx'
 import ProtectedRoute from './Components/ProtactedRoute/ProtectedRoute.jsx'
 import DasboardContact from './Components/Dashboard/DashboardComponents/Contact/DasboardContact.jsx'
 import MainDashboard from './Components/Dashboard/MainDashboard.jsx'
+import DashboardReportPage from './Components/Dashboard/DashboardComponents/DashboardReportPage/DashboardReportPage.jsx'
 
 
 
@@ -81,10 +82,12 @@ function App() {
 
 
         {/* Dashboard Routes */}
+
         <Route path="/dashboard" element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route index element={<MainDashboard />} />
             <Route path="contact" element={<DasboardContact />} />
+            <Route path="Reports" element={<DashboardReportPage />} />
           </Route>
         </Route>
 

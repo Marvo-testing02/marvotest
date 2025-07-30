@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import {
     Box,
+    Button,
     CssBaseline,
     Divider,
     IconButton,
@@ -12,14 +13,21 @@ import {
     ListItemText,
     Drawer as MuiDrawer,
     useMediaQuery,
-} from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 240;
+} from '@mui/material';
+import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import AirplayOutlinedIcon from '@mui/icons-material/AirplayOutlined';
+import SettingsSuggestOutlinedIcon from '@mui/icons-material/SettingsSuggestOutlined';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import logo from "../../../../assets/logo/BlueLogo.png"
+import Robo from "../../../../assets/Dashboardimg/Robo.png"
+import useDashboardStore from '../../../../Store/useDashboardStore/useDashboardStore';
+
+const drawerWidth = 272;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -42,6 +50,16 @@ const closedMixin = (theme) => ({
     },
 });
 
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
+
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -51,22 +69,44 @@ const Drawer = styled(MuiDrawer, {
     boxSizing: 'border-box',
     ...(open && {
         ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
+        '& .MuiDrawer-paper': {
+            ...openedMixin(theme),
+            height: '100%', // ✅ Make paper 100% of parent, not vh
+        },
     }),
     ...(!open && {
         ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
+        '& .MuiDrawer-paper': {
+            ...closedMixin(theme),
+            height: '100%',
+        },
     }),
+    boxShadow: `1px 0px 1px 0px #0000001A,
+                2px 0px 2px 0px #00000017,
+                5px 0px 3px 0px #0000000D,
+                9px 0px 4px 0px #00000003,
+                15px 0px 4px 0px #00000000`,
 }));
+
+
+const drawerItems = [
+    { text: 'Dashboard', route: '/dashboard', icon: <SpaceDashboardOutlinedIcon /> },
+    { text: 'Contacts', route: '/dashboard/contact', icon: <PeopleAltOutlinedIcon /> },
+    { text: 'Campaigns', route: '/dashboard/Campaigns', icon: <SendOutlinedIcon /> },
+    { text: 'Pipeline Builder', route: '/dashboard/Pipeline', icon: <FilterAltOutlinedIcon /> },
+    { text: 'Reports', route: '/dashboard/Reports', icon: <AirplayOutlinedIcon /> },
+    { text: 'Settings', route: '/dashboard/Settings', icon: <SettingsSuggestOutlinedIcon /> },
+];
+
 
 export default function SidebarLayout({ children }) {
     const theme = useTheme();
     const navigate = useNavigate();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
+    const { setCurrentPageTitle } = useDashboardStore();
     const [open, setOpen] = React.useState(false);
     const timeoutRef = React.useRef(null);
-
+    const location = useLocation();
     const handleMouseEnter = () => {
         if (!isSmallScreen) {
             clearTimeout(timeoutRef.current);
@@ -78,9 +118,10 @@ export default function SidebarLayout({ children }) {
         if (!isSmallScreen) {
             timeoutRef.current = setTimeout(() => {
                 setOpen(false);
-            }, 3000); // 3 seconds
+            }, 1000); // 3 seconds
         }
     };
+
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -91,22 +132,30 @@ export default function SidebarLayout({ children }) {
                 open={open}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                sx={{ zIndex: 1 }}
             >
-                <Divider />
+                <DrawerHeader sx={{ px: 2, mb: 0 }}>
+                    {open ? <>   <img src={logo} alt="MARVO" /></> : <>   <img src={Robo} alt="MARVO" /></>}
+                </DrawerHeader>
+
+
                 <List>
-                    {[
-                        { text: 'Inbox', route: '/dashboard' },
-                        { text: 'Starred', route: '/dashboard/contact' },
-                        { text: 'Send email', route: '/send-email' },
-                        { text: 'Drafts', route: '/drafts' },
-                    ].map((item, index) => (
-                        <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+                    {drawerItems.map((item) => (
+                        <ListItem key={item.text} disablePadding sx={{ px: 1.5, py: 0.3 }}>
                             <ListItemButton
-                                onClick={() => navigate(item.route)}
+                                onClick={() => {
+                                    setCurrentPageTitle(item.text)
+                                    navigate(item.route);
+                                }}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    borderRadius: '12px',
+                                    backgroundColor: location.pathname === item.route ? '#D9ECFF' : 'transparent',
+                                    '&:hover': {
+                                        backgroundColor: '#D9ECFF', // optional
+                                    }
                                 }}
                             >
                                 <ListItemIcon
@@ -114,45 +163,32 @@ export default function SidebarLayout({ children }) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'black'
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {item.icon}
                                 </ListItemIcon>
                                 <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
             </Drawer>
 
-            <Box component="main" sx={{ flexGrow: 1, p: 2 }}>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    px: { xs: 2, sm: 2, md: 2, lg: 6 },
+                    py: 2, // Padding on Y
+                    bgcolor: '#F2F9FF',
+                    overflowX: 'hidden',
+                    overflowY: 'auto',
+                }}
+            >
                 {children}
             </Box>
+
         </Box>
     );
 }
