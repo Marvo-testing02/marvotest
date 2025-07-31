@@ -37,8 +37,10 @@ import DashboardLayout from './Components/Dashboard/DashboardLayout.jsx'
 import ProtectedRoute from './Components/ProtactedRoute/ProtectedRoute.jsx'
 import DasboardContact from './Components/Dashboard/DashboardComponents/Contact/DasboardContact.jsx'
 import MainDashboard from './Components/Dashboard/MainDashboard.jsx'
-import DashboardReportPage from './Components/Dashboard/DashboardComponents/DashboardReportPage/DashboardReportPage.jsx'
 
+import PipelinePage from './Pages/DashboardPage/PipelinePage.jsx'
+=======
+import DashboardReportPage from './Components/Dashboard/DashboardComponents/DashboardReportPage/DashboardReportPage.jsx'
 
 
 function App() {
@@ -90,6 +92,7 @@ function App() {
             <Route path="Reports" element={<DashboardReportPage />} />
           </Route>
         </Route>
+        <Route path="/pipeline" element={<PipelinePage />} />
 
       </Routes>
     </>
