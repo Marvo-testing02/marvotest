@@ -55,11 +55,9 @@ const EnterprisePage8 = () => {
             <Box sx={{ position: 'absolute', top: 9, left: 1229, width: 211, height: 111.22, zIndex: 5 }}>
                 <Box component="img" src={cloud} width="100%" />
             </Box>
-            <Box sx={{ position: 'absolute', top: 28, left: 1275, width: 70, height: 76, transform: 'rotate(-25.43deg)', zIndex: 6 }}>
-                <Box component="img" src={plane} width="100%" />
-            </Box>
+        
             <motion.div
-                            initial={{ top: 125, left: 1126 }}
+                            initial={{ top: 130, left: 1170 }}
                             animate={{ top: 28, left: 1275}}
                             transition={{ duration: 0.5 }}
                             style={{

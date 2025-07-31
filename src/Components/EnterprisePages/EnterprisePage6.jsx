@@ -52,7 +52,7 @@ const EnterprisePage6 = () => {
             </Box>
             <motion.div
                 initial={{ top: 12, left: 882 }}
-                animate={{ top: 130, left: 1150.63 }}
+                animate={{ top: 125, left: 1125 }}
                 transition={{ duration: 0.5 }}
                 style={{
                     position: 'absolute',
