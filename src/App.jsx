@@ -38,6 +38,9 @@ import ProtectedRoute from './Components/ProtactedRoute/ProtectedRoute.jsx'
 import DasboardContact from './Components/Dashboard/DashboardComponents/Contact/DasboardContact.jsx'
 import MainDashboard from './Components/Dashboard/MainDashboard.jsx'
 import DashboardReportPage from './Components/Dashboard/DashboardComponents/DashboardReportPage/DashboardReportPage.jsx'
+import DashboardPipelinePage from './Components/Dashboard/DashboardComponents/Pipeline/DashboardPipelinePage.jsx'
+import DashboardSettingPage from './Components/Dashboard/DashboardComponents/Settings/DashboardSettingPage.jsx'
+import DashboardCampaignPage from './Components/Dashboard/DashboardComponents/Campaign/DashboardCampaignPage.jsx'
 
 
 
@@ -88,6 +91,9 @@ function App() {
             <Route index element={<MainDashboard />} />
             <Route path="contact" element={<DasboardContact />} />
             <Route path="Reports" element={<DashboardReportPage />} />
+            <Route path="Pipeline" element={<DashboardPipelinePage />} />
+            <Route path="Settings" element={<DashboardSettingPage />} />
+            <Route path="Campaigns" element={<DashboardCampaignPage />} />
           </Route>
         </Route>
 

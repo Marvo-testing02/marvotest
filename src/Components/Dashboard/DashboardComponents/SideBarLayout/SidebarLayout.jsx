@@ -26,6 +26,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from "../../../../assets/logo/BlueLogo.png"
 import Robo from "../../../../assets/Dashboardimg/Robo.png"
 import useDashboardStore from '../../../../Store/useDashboardStore/useDashboardStore';
+import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 
 const drawerWidth = 272;
 
@@ -71,7 +72,7 @@ const Drawer = styled(MuiDrawer, {
         ...openedMixin(theme),
         '& .MuiDrawer-paper': {
             ...openedMixin(theme),
-            height: '100%', 
+            height: '100%',
         },
     }),
     ...(!open && {
@@ -173,6 +174,54 @@ export default function SidebarLayout({ children }) {
                         </ListItem>
                     ))}
                 </List>
+
+                <Box sx={{ flexGrow: 1 }} />
+
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+
+                    <Box sx={{ px: 2, mb: 2, width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            sx={{
+                                display: 'flex',
+                                justifyContent: "center",
+                                gap: "10px",
+                                backgroundColor: !open ? "transparent" : "#0D80F2",
+                                color: 'white',
+                                textTransform: 'none',
+                                borderRadius: '8px',
+                                py: 1,
+                                fontWeight: 500,
+
+                                fontSize: '14px',
+                                boxShadow: 'none',
+                                '&:hover': {
+                                    backgroundColor: '#0056b3',
+                                },
+                            }}
+                        >
+                            {!open && <CampaignOutlinedIcon sx={{ color: open ? "white" : "black" }} />}
+                            {open && (
+                                <span style={{ fontSize: '14px', fontWeight: 500 }}>Start Campaign</span>
+                            )}
+                        </Button>
+                    </Box>
+
+                    {/* Notifications Text */}
+                    <Box sx={{ px: 2, pb: 3, display: 'flex', alignItems: 'center', cursor: 'pointer', width: '85%' }}>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/512/1827/1827349.png"
+                            alt="Notifications"
+                            width={20}
+                            height={20}
+                            style={{ marginRight: open ? 10 : 0 }}
+                        />
+                        {open && (
+                            <span style={{ fontSize: '14px', fontWeight: 500 }}>Notifications</span>
+                        )}
+                    </Box>
+                </Box>
             </Drawer>
 
             <Box
