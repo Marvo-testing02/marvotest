@@ -138,7 +138,7 @@ import { FaQuora } from "react-icons/fa6";
 const bubbles = [
   { icon: <FaGoogle />, color: "bg-yellow-300", top: "-80px", left: "-250px", size: "w-16 h-16" },
   { icon: <FaWhatsapp />, color: "bg-green-500", top: "10px", left: "-290px", size: "w-10 h-10" },
-  { icon: <FaInstagram />, color: "bg-gradient-to-r from-pink-500 to-yellow-500", top: "80px", left: "-200px", size: "w-14 h-14" },
+  { icon: <FaInstagram />, color: "bg-gradient-to-r from-pink-500 to-yellow-500", top: "80px", left: "-200px", size: "w-14 h-14", link: "https://www.instagram.com/marvotesting02/" },
   { icon: <FaLinkedinIn />, color: "bg-blue-600", top: "150px", left: "-270px", size: "w-16 h-16" },
   { icon: <FaTwitter />, color: "bg-black", top: "220px", left: "-200px", size: "w-16 h-16" },
   { icon: <FaQuora />, color: "bg-red-600", top: "-60px", right: "-250px", size: "w-14 h-14" },
@@ -181,15 +181,15 @@ const HeroSocialCircle = () => {
     <div className="relative mt-0 w-full flex flex-col justify-center items-center h-[700px] bg-gradient-to-b from-blue-100 to-white px-4 text-center">
       {/* Heading */}
       <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
-        Stop Wasting Time. 
-      <span className="relative inline-block">
-    {/* <span className="relative z-10 text-black">Start Getting Results.</span> */}
-    <span className="relative inline-block">
+        Stop Wasting Time.
+        <span className="relative inline-block">
+          {/* <span className="relative z-10 text-black">Start Getting Results.</span> */}
+          <span className="relative inline-block">
             <span className="relative z-10 text-black"> Start Getting Results.</span>
             <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
           </span>
-    <span className="absolute inset-0 -skew-x-12 bg-bg-blue-300  z-0"></span>
-  </span>
+          <span className="absolute inset-0 -skew-x-12 bg-bg-blue-300  z-0"></span>
+        </span>
       </h1>
       <p className="mt-2 text-gray-700 text-sm md:text-base md:mb-6 md:mt-4">
         Marketing should work while you sleep. MARVO makes sure it does.
@@ -216,7 +216,13 @@ const HeroSocialCircle = () => {
               transform: hovered ? "scale(1.05)" : undefined,
             }}
           >
-            {hovered ? bubble.icon : null}
+            {hovered && bubble.link ? (
+              <a href={bubble.link} target="_blank" rel="noopener noreferrer">
+                {bubble.icon}
+              </a>
+            ) : (
+              hovered ? bubble.icon : null
+            )}
           </div>
         ))}
       </div>

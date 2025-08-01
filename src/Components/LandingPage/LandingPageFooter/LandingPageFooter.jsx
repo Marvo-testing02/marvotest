@@ -78,13 +78,13 @@ function LandingPageFooter() {
                     <div className="flex flex-wrap items-center justify-between md:justify-center gap-4 md:gap-5 w-full px-4">
                         <hr className="border-t border-black flex-1 md:max-w-65 lg:max-w-80 hidden md:block" />
                         {[
-                            LinkedInIcon,
-                            InstagramIcon,
-                            GitHubIcon,
-                            TwitterIcon,
-                            TikTokIcon,
-                            GoogleIcon
-                        ].map((Icon, index) => (
+                            { Icon: LinkedInIcon, link: null },
+                            { Icon: InstagramIcon, link: "https://www.instagram.com/marvotesting02/" },
+                            { Icon: GitHubIcon, link: null },
+                            { Icon: TwitterIcon, link: null },
+                            { Icon: TikTokIcon, link: null },
+                            { Icon: GoogleIcon, link: null }
+                        ].map(({ Icon, link }, index) => (
                             <motion.div
                                 key={index}
                                 variants={index < 3 ? fadeInFromRight : fadeInFromLeft}
@@ -93,9 +93,16 @@ function LandingPageFooter() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: index * 0.1 }}
                             >
-                                <Icon className="text-gray-600 hover:text-black cursor-pointer" />
+                                {link ? (
+                                    <a href={link} target="_blank" rel="noopener noreferrer">
+                                        <Icon className="text-gray-600 hover:text-black cursor-pointer" />
+                                    </a>
+                                ) : (
+                                    <Icon className="text-gray-600 hover:text-black cursor-pointer" />
+                                )}
                             </motion.div>
-                        ))}
+                        ))
+                        }
                         <hr className="border-t border-black flex-1 md:w-65 lg:max-w-80 hidden md:block" />
                     </div>
                 </div>
