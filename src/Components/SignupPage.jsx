@@ -155,7 +155,6 @@ const SignupPage = () => {
                                 width: { xs: '40%', md: '40%' },
                                 backgroundColor: '#fff',
                                 borderRadius: { xs: '20px 20px 0 0', md: '20px 0 0 20px' },
-                                display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 py: { xs: 2, md: 0 },

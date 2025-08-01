@@ -54,8 +54,8 @@ const EnterprisePage7 = () => {
 
             
             <motion.div
-                initial={{ top: 130, left: 1150.63 }}
-                animate={{ top: 125, left: 1126}}
+                initial={{ top: 125, left: 1125 }}
+                animate={{ top: 130, left: 1170}}
                 transition={{ duration: 0.5 }}
                 style={{
                     position: 'absolute',
@@ -171,6 +171,26 @@ const EnterprisePage7 = () => {
                 }}
             >
                 5
+            </Box>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 125,
+                    left: 1100,
+                    width: 35,
+                    height: 35,
+                    borderRadius: '50%',
+                    backgroundColor: '#57AFFF',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 'bold',
+                    fontSize: 16,
+                    zIndex: 7,
+                }}
+            >
+                6
             </Box>
             <motion.div
                 initial={{ opacity: 0, y: 100 }}
