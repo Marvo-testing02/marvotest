@@ -33,6 +33,14 @@ import ProfessionalPage3 from "./Components/OtherProfessional/ProfessionalPage3.
 import ProfessionalPage4 from "./Components/OtherProfessional/ProfessionalPage4.jsx"
 import ProfessionalPage5 from "./Components/OtherProfessional/ProfessionalPage5.jsx"
 import ProfessionalPage6 from "./Components/OtherProfessional/ProfessionalPage6.jsx"
+import DashboardLayout from './Components/Dashboard/DashboardLayout.jsx'
+import ProtectedRoute from './Components/ProtactedRoute/ProtectedRoute.jsx'
+import DasboardContact from './Components/Dashboard/DashboardComponents/Contact/DasboardContact.jsx'
+import MainDashboard from './Components/Dashboard/MainDashboard.jsx'
+import DashboardReportPage from './Components/Dashboard/DashboardComponents/DashboardReportPage/DashboardReportPage.jsx'
+import DashboardPipelinePage from './Components/Dashboard/DashboardComponents/Pipeline/DashboardPipelinePage.jsx'
+import DashboardSettingPage from './Components/Dashboard/DashboardComponents/Settings/DashboardSettingPage.jsx'
+import DashboardCampaignPage from './Components/Dashboard/DashboardComponents/Campaign/DashboardCampaignPage.jsx'
 
 
 
@@ -74,6 +82,20 @@ function App() {
         <Route path="/otherprofessional/page4" element={<ProfessionalPage4 />} />
         <Route path="/otherprofessional/page5" element={<ProfessionalPage5 />} />
         <Route path="/otherprofessional/page6" element={<ProfessionalPage6 />} />
+
+
+        {/* Dashboard Routes */}
+
+        <Route path="/dashboard" element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route index element={<MainDashboard />} />
+            <Route path="contact" element={<DasboardContact />} />
+            <Route path="Reports" element={<DashboardReportPage />} />
+            <Route path="Pipeline" element={<DashboardPipelinePage />} />
+            <Route path="Settings" element={<DashboardSettingPage />} />
+            <Route path="Campaigns" element={<DashboardCampaignPage />} />
+          </Route>
+        </Route>
       </Routes>
     </>
   )
