@@ -12,6 +12,7 @@ import {
     ListItemIcon,
     ListItemText,
     Drawer as MuiDrawer,
+    Tooltip,
     useMediaQuery,
 
 } from '@mui/material';
@@ -91,12 +92,12 @@ const Drawer = styled(MuiDrawer, {
 
 
 const drawerItems = [
-    { text: 'Dashboard', route: '/dashboard', icon: <SpaceDashboardOutlinedIcon /> },
-    { text: 'Contacts', route: '/dashboard/contact', icon: <PeopleAltOutlinedIcon /> },
-    { text: 'Campaigns', route: '/dashboard/Campaigns', icon: <SendOutlinedIcon /> },
-    { text: 'Pipeline Builder', route: '/dashboard/Pipeline', icon: <FilterAltOutlinedIcon /> },
-    { text: 'Reports', route: '/dashboard/Reports', icon: <AirplayOutlinedIcon /> },
-    { text: 'Settings', route: '/dashboard/Settings', icon: <SettingsSuggestOutlinedIcon /> },
+    { text: 'Dashboard', route: '/dashboard', icon: <SpaceDashboardOutlinedIcon />, tooltip: 'Overview of KPIs' },
+    { text: 'Contacts', route: '/dashboard/contact', icon: <PeopleAltOutlinedIcon />, tooltip: 'List, import, and segmentation of leads' },
+    { text: 'Campaigns', route: '/dashboard/Campaigns', icon: <SendOutlinedIcon />, tooltip: 'Create and track email/SMS/social campaigns' },
+    { text: 'Pipeline Builder', route: '/dashboard/Pipeline', icon: <FilterAltOutlinedIcon />, tooltip: 'Visual funnel creation with drag & drop' },
+    { text: 'Reports', route: '/dashboard/Reports', icon: <AirplayOutlinedIcon />, tooltip: 'Advanced performance and ROI analysis' },
+    { text: 'Settings', route: '/dashboard/Settings', icon: <SettingsSuggestOutlinedIcon />, tooltip: 'CRM configuration, team roles, integrations' },
 ];
 
 
@@ -143,36 +144,65 @@ export default function SidebarLayout({ children }) {
                 <List>
                     {drawerItems.map((item) => (
                         <ListItem key={item.text} disablePadding sx={{ px: 1.5, py: 0.3 }}>
-                            <ListItemButton
-                                onClick={() => {
-                                    setCurrentPageTitle(item.text)
-                                    navigate(item.route);
+                            <Tooltip
+                                title={item.tooltip}
+                                placement="right"
+                                PopperProps={{
+                                    modifiers: [
+                                        {
+                                            name: 'offset',
+                                            options: {
+                                                offset: [0, 20],
+                                            },
+                                        },
+                                    ],
                                 }}
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                    borderRadius: '12px',
-                                    backgroundColor: location.pathname === item.route ? '#D9ECFF' : 'transparent',
-                                    '&:hover': {
-                                        backgroundColor: '#D9ECFF', // optional
-                                    }
+                                componentsProps={{
+                                    tooltip: {
+                                        sx: {
+                                            bgcolor: '#888888',
+                                            color: 'white',
+                                            fontSize: 13,
+                                            px: 1.5,
+                                            py: 1.5,
+                                            borderRadius: '8px',
+                                        },
+                                    },
                                 }}
                             >
-                                <ListItemIcon
+
+                                <ListItemButton
+                                    onClick={() => {
+                                        setCurrentPageTitle(item.text)
+                                        navigate(item.route);
+                                    }}
                                     sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                        color: 'black'
+                                        minHeight: 48,
+                                        justifyContent: open ? 'initial' : 'center',
+                                        px: 2.5,
+                                        borderRadius: '12px',
+                                        backgroundColor: location.pathname === item.route ? '#D9ECFF' : 'transparent',
+                                        '&:hover': {
+                                            backgroundColor: '#D9ECFF',
+                                        }
                                     }}
                                 >
-                                    {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                            color: 'black'
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                                </ListItemButton>
+                            </Tooltip>
                         </ListItem>
                     ))}
+
                 </List>
 
                 <Box sx={{ flexGrow: 1 }} />
