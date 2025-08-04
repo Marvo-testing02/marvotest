@@ -12,7 +12,7 @@ import Freelancers from "../../Components/LandingPageComponents/Freelancers/Free
 import Chatcards from "../../Components/LandingPageComponents/Chatcards/Chatcards.jsx"
 import Marketingcard from "../../Components/LandingPageComponents/Marketingcard/Marketingcard.jsx"
 import HeroSocialCircle from "../../Components/LandingPageComponents/HeroSocialCircle/HeroSocialCircle.jsx"
-import ChatBot from './ChatBot.jsx'
+import ChatBot from './ChatBotPage/ChatBot.jsx'
 
 function MainLandingPage() {
     return (
