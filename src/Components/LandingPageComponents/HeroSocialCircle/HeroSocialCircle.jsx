@@ -14,6 +14,18 @@ import { FaQuora } from "react-icons/fa6";
 import DashboardLaptop from "../../../assets/images/DashboardLaptop.png";
 
 const bubbles = [
+
+  { icon: <FaGoogle />, color: "bg-yellow-300", top: "-80px", left: "-250px", size: "w-16 h-16" },
+  { icon: <FaWhatsapp />, color: "bg-green-500", top: "10px", left: "-290px", size: "w-10 h-10" },
+  { icon: <FaInstagram />, color: "bg-gradient-to-r from-pink-500 to-yellow-500", top: "80px", left: "-200px", size: "w-14 h-14", link: "https://www.instagram.com/marvotesting02/" },
+  { icon: <FaLinkedinIn />, color: "bg-blue-600", top: "150px", left: "-270px", size: "w-16 h-16" },
+  { icon: <FaTwitter />, color: "bg-black", top: "220px", left: "-200px", size: "w-16 h-16" },
+  { icon: <FaQuora />, color: "bg-red-600", top: "-60px", right: "-250px", size: "w-14 h-14" },
+  { icon: <FaFacebookF />, color: "bg-blue-500", top: "10px", right: "-290px", size: "w-10 h-10" },
+  { icon: <FaSnapchatGhost />, color: "bg-yellow-400", top: "190px", right: "-200px", size: "w-16 h-16" },
+  { icon: <SiMessenger />, color: "bg-blue-600", top: "80px", right: "-270px", size: "w-14 h-14" },
+  { icon: <FaTiktok />, color: "bg-gradient-to-r from-purple-500 to-pink-500", top: "240px", right: "-270px", size: "w-16 h-16" },
+
   { icon: <FaGoogle />, color: "bg-yellow-300", top: "-80px", left: "-250px", size: "w-16 h-16", mobileSize: "w-10 h-10" },
   { icon: <FaWhatsapp />, color: "bg-green-500", top: "10px", left: "-290px", size: "w-10 h-10", mobileSize: "w-8 h-8" },
   { icon: <FaInstagram />, color: "bg-gradient-to-r from-pink-500 to-yellow-500", top: "80px", left: "-200px", size: "w-14 h-14", mobileSize: "w-10 h-10" },
@@ -24,6 +36,7 @@ const bubbles = [
   { icon: <FaSnapchatGhost />, color: "bg-yellow-400", top: "190px", right: "-200px", size: "w-16 h-16", mobileSize: "w-10 h-10" },
   { icon: <SiMessenger />, color: "bg-blue-600", top: "80px", right: "-270px", size: "w-14 h-14", mobileSize: "w-10 h-10" },
   { icon: <FaTiktok />, color: "bg-gradient-to-r from-purple-500 to-pink-500", top: "240px", right: "-270px", size: "w-16 h-16", mobileSize: "w-10 h-10 mt-6" },
+
 ];
 
 const initialPositions = [
@@ -62,8 +75,17 @@ const HeroSocialCircle = () => {
       <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
         Stop Wasting Time.
         <span className="relative inline-block">
+
+          {/* <span className="relative z-10 text-black">Start Getting Results.</span> */}
+          <span className="relative inline-block">
+            <span className="relative z-10 text-black"> Start Getting Results.</span>
+            <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
+          </span>
+          <span className="absolute inset-0 -skew-x-12 bg-bg-blue-300  z-0"></span>
+
           <span className="relative z-10 text-black"> Start Getting Results.</span>
           <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
+
         </span>
       </h1>
       <p className="mt-2 text-gray-700 text-sm md:text-base md:mb-6 md:mt-4">
@@ -96,8 +118,18 @@ const HeroSocialCircle = () => {
               transform: hovered || isMobile ? "scale(1.05)" : undefined,
             }}
           >
+
+            {hovered && bubble.link ? (
+              <a href={bubble.link} target="_blank" rel="noopener noreferrer">
+                {bubble.icon}
+              </a>
+            ) : (
+              hovered ? bubble.icon : null
+            )}
+
             {/* Show icons only when mobile OR when hovered */}
             {(isMobile || hovered) && bubble.icon}
+
           </div>
         ))}
       </div>
