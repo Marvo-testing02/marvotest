@@ -7,7 +7,9 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
+import HeatmapLayer from '../HeatMapLayer/HeatmapLayer .jsx';
 import L from 'leaflet';
+import 'leaflet.heat';
 import {
     LineChart,
     BarChart,
@@ -92,7 +94,6 @@ const usageData = [
     { city: 'Mumbai', coords: [19.0760, 72.8777], users: 420 },
     { city: 'Bengaluru', coords: [12.9716, 77.5946], users: 320 },
     { city: 'Hyderabad', coords: [17.3850, 78.4867], users: 270 },
-
 ];
 
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
@@ -344,7 +345,7 @@ function DashboardOverviewPage() {
 
 
             {/* Active Countries Heatmap / Usage by Location */}
-            <Box className="mt-10 mb-3  bg-[#F1F8FF]  rounded-xl w-full">
+            {/* <Box className="mt-10 mb-3  bg-[#F1F8FF]  rounded-xl w-full">
                 <Typography sx={{ fontSize: '22px', mb: 2, fontWeight: 700 }} className="mb-4">
                     Active Countries Heatmap
                 </Typography>
@@ -371,8 +372,44 @@ function DashboardOverviewPage() {
                         ))}
                     </MapContainer>
                 </Box>
-            </Box>
+            </Box> */}
 
+            <Box className="mt-10 mb-3 bg-[#F1F8FF] rounded-xl w-full">
+                <Typography sx={{ fontSize: '22px', mb: 2, fontWeight: 700 }} className="mb-4">
+                    Active Countries Heatmap
+                </Typography>
+
+                <Box className="w-full h-[500px] rounded-xl overflow-hidden">
+                    <MapContainer
+                        center={[22.9734, 78.6569]}
+                        zoom={4.5}
+                        style={{ height: '100%', width: '100%' }}
+                        scrollWheelZoom={false}
+                    >
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution='© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
+                        />
+
+                        {/* 👇 Heatmap instead of markers */}
+                        <HeatmapLayer
+                            points={usageData.map(loc => [...loc.coords, loc.users])}
+                        />
+                    </MapContainer>
+                </Box>
+
+                {/* Legend */}
+                <Box className="flex gap-4 mt-4 ml-2">
+                    <Box className="flex items-center gap-2">
+                        <Box className="w-4 h-4 bg-[#045A5C] rounded-sm"></Box>
+                        <Typography variant="body2">Highly Engaged</Typography>
+                    </Box>
+                    <Box className="flex items-center gap-2">
+                        <Box className="w-4 h-4 bg-[#D8F2FF] rounded-sm"></Box>
+                        <Typography variant="body2">Inactive</Typography>
+                    </Box>
+                </Box>
+            </Box>
         </Box>
     );
 }
