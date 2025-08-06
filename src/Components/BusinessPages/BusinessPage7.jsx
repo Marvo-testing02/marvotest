@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Radio, RadioGroup, FormControlLabel, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -10,11 +9,10 @@ import dottedLine from '../../assets/Ways/SevenWay.svg';
 import sideIllustration from '../../assets/illustrations/robot.svg';
 import '../../App.css';
 
-const BusinessPage7 = () => {
+const BusinessPage7 = ({goToNext}) => {
     const [clientType, setClientType] = useState('');
     const [skipped, setSkipped] = useState(false);
     const [error, setError] = useState(false);
-    // const navigate = useNavigate();
 
     const handleSkip = () => {
         setSkipped(true);
@@ -30,7 +28,7 @@ const BusinessPage7 = () => {
             return;
         }
         setError(false);
-        // navigate('/freelancer/page5');
+        goToNext();
     };
 
     return (

@@ -30,25 +30,26 @@ const RoleSelectionPage = () => {
 
         switch (selectedRole) {
             case 'Freelancer':
-                navigate('/freelancer/page1');
+                navigate('/freelancer/page/1');
                 break;
             case 'Small Business Marketing':
-                navigate('/business/page1');
+                navigate('/business/page/1');
                 break;
             case 'Enterprise Marketing Leader':
-                navigate('/enterprise/page1');
+                navigate('/enterprise/page/1');
                 break;
             case 'Other Professional Role':
-                navigate('/otherprofessional/page1');
+                navigate('/otherprofessional/page/1');
                 break;
             default:
                 break;
         }
+
     };
 
     return (
         <div
-           
+
             style={{ fontFamily: 'Inter, sans-serif' }}
             className='w-full '
 

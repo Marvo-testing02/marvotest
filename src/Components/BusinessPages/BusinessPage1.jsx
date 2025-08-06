@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Button, TextField } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -11,14 +10,14 @@ import sideIllustration from '../../assets/illustrations/www.svg';
 
 import '../../App.css';
 
-const BusinessPage1 = () => {
+const BusinessPage1 = ({goToNext}) => {
     const [goal1, setGoal1] = useState('');
     const [goal2, setGoal2] = useState('');
     const [goal3, setGoal3] = useState('');
     const [error, setError] = useState(false);
     const [skipped, setSkipped] = useState(false);
 
-    const navigate = useNavigate();
+ 
 
     const handleSkip = () => {
         setSkipped(true);
@@ -33,7 +32,8 @@ const BusinessPage1 = () => {
             return;
         }
         setError(false);
-        navigate('/business/page2');
+        goToNext();
+
     };
 
     return (

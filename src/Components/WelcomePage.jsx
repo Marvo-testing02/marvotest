@@ -21,13 +21,24 @@ const WelcomePage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!email) {
-      setEmailError('Email is required.');
-      return;
-    }
-    setEmailError('');
+  if (!email) {
+    setEmailError('Email is required.');
+    return;
+  }
+
+  setEmailError('');
+
+  localStorage.setItem('email', email);
+
+  if (email.includes('existing')) {
     navigate('/login');
-  };
+  } else {
+    navigate('/signup');
+  }
+};
+
+
+
 
   return (
     <Box

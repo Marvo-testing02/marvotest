@@ -28,42 +28,22 @@ const SignupPage = () => {
         setShowPassword(!showPassword);
     };
     const handleSubmit = () => {
-        let valid = true;
-        setEmailError('');
-        setPasswordError('');
-        setFirstNameError('');
-        setLastNameError('');
-        setPhoneError('');
-
         if (!email) {
             setEmailError('Email is required.');
-            valid = false;
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            setEmailError('Enter a valid email address.');
-            valid = false;
+            return;
         }
 
-        if (!password) {
-            setPasswordError('Password is required.');
-            valid = false;
-        }
-        if (!firstName) {
-            setFirstNameError('FirstName is required.');
-            valid = false;
-        }
-        if (!lastName) {
-            setLastNameError('LastName is required.');
-            valid = false;
-        }
-        if (!phone) {
-            setPhoneError('Phone number is required.');
-            valid = false;
-        }
-        if (!valid) return;
+        setEmailError('');
+        localStorage.setItem('email', email);
 
-
-        navigate('/role', { state: { firstName } });
+        // Simulate: if email includes "existing", navigate to login
+        if (email.includes('existing')) {
+            navigate('/login');
+        } else {
+            navigate('/role');
+        }
     };
+
 
     return (
         <Box

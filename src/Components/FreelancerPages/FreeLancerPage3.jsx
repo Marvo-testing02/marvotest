@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Radio, RadioGroup, FormControlLabel, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -9,11 +8,10 @@ import dottedLine from '../../assets/Ways/ThreeWay.svg';
 import sideIllustration from '../../assets/illustrations/buildings.svg';
 import '../../App.css';
 
-const FreelancerPage3 = () => {
+const FreelancerPage3 = ({goToNext}) => {
     const [goal, setGoal] = useState('');
     const [skipped, setSkipped] = useState(false);
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
     const handleSkip = () => {
         setSkipped(true);
@@ -28,7 +26,8 @@ const FreelancerPage3 = () => {
             return;
         }
         setError(false);
-        navigate('/freelancer/page4');
+        goToNext();
+
     };
 
     return (

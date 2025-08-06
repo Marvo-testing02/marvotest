@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Radio, RadioGroup, FormControlLabel, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -9,11 +8,10 @@ import dottedLine from '../../assets/Ways/FiveWay.svg';
 import sideIllustration from '../../assets/illustrations/dataanalysis.svg';
 import '../../App.css';
 
-const BusinessPage5 = () => {
+const BusinessPage5 = ({goToNext}) => {
     const [clientType, setClientType] = useState('');
     const [skipped, setSkipped] = useState(false);
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
     const handleSkip = () => {
         setSkipped(true);
@@ -28,7 +26,8 @@ const BusinessPage5 = () => {
             return;
         }
         setError(false);
-        navigate('/business/page6');
+        goToNext();
+
     };
 
     return (
@@ -46,10 +45,10 @@ const BusinessPage5 = () => {
             }}
         >
             <Box component="img" src={logo} alt="Logo" sx={{ position: 'absolute', top: 20, left: 20, width: 120, zIndex: 10 }} />
-            
+
             <Box sx={{ position: 'absolute', top: 43, left: 172, width: 790, height: 124, zIndex: 5 }}>
-                            <Box component="img" src={dottedLine} width="100%" />
-                        </Box>
+                <Box component="img" src={dottedLine} width="100%" />
+            </Box>
 
             <motion.div
                 initial={{ top: 90.86, left: 720.61 }}
