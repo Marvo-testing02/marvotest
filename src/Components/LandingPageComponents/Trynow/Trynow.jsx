@@ -4,7 +4,8 @@ import background_circle from "../../../assets/images/background_circle.png"; //
 
 const Trynow = () => {
   return (
-    <div className="relative flex flex-col items-center justify-center py-12 px-4 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+    <div className="relative flex justify-center items-center py-12 px-4 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+
 
       <motion.div
         initial={{ opacity: 0, y: 80 }}
@@ -26,8 +27,8 @@ const Trynow = () => {
         </h2>
         <p className="mt-1 text-[24px] sm:text-[31px] leading-[32px] sm:leading-[42px] text-black text-center font-semibold z-10">
           Watch Demo,
-          <span className="relative inline-block">
-            <span className="relative z-10 text-black"> Right Now</span>
+          <span className="relative inline-block ml-1">
+            <span className="relative z-10 p-2  text-black"> Right Now</span>
             <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
           </span>
         </p>

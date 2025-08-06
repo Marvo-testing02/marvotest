@@ -1,4 +1,5 @@
-// useDashboardStore.js
+// /Store/useDashboardStore/useDashboardStore.js
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -7,9 +8,13 @@ const useDashboardStore = create(
         (set) => ({
             currentPageTitle: 'Dashboard',
             setCurrentPageTitle: (title) => set({ currentPageTitle: title }),
+
+
+            searchQuery: '',
+            setSearchQuery: (query) => set({ searchQuery: query }),
         }),
         {
-            name: 'dashboard-storage', // key in localStorage
+            name: 'dashboard-storage',
         }
     )
 );

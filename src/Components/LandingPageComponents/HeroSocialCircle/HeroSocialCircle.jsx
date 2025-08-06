@@ -12,6 +12,8 @@ import {
 import { SiMessenger } from "react-icons/si";
 import { FaQuora } from "react-icons/fa6";
 import DashboardLaptop from "../../../assets/images/DashboardLaptop.png";
+import { motion } from "framer-motion";
+
 
 const bubbles = [
   { icon: <FaGoogle />, color: "bg-yellow-300", top: "-80px", left: "-250px", size: "w-16 h-16", mobileSize: "w-10 h-10" },
@@ -59,16 +61,28 @@ const HeroSocialCircle = () => {
 
   return (
     <div className="relative mt-0 h-[600px] w-full flex flex-col justify-center items-center md:h-[700px] bg-gradient-to-b from-blue-100 to-white px-4 text-center">
-      <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
+      <motion.h1
+        initial={{ opacity: 0, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-2xl md:text-4xl font-bold text-gray-800"
+      >
         Stop Wasting Time.
         <span className="relative inline-block">
-          <span className="relative z-10 text-black"> Start Getting Results.</span>
+          <span className="relative z-10 p-2 text-black"> Start Getting Results.</span>
           <span className="absolute inset-0 -skew-x-12 bg-blue-300 z-0"></span>
         </span>
-      </h1>
-      <p className="mt-2 text-gray-700 text-sm md:text-base md:mb-6 md:mt-4">
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+        className="mt-2 text-gray-700 text-sm md:text-base md:mb-6 md:mt-4"
+      >
         Marketing should work while you sleep. MARVO makes sure it does.
-      </p>
+      </motion.p>
+
 
       {/* Bubble Container */}
       <div

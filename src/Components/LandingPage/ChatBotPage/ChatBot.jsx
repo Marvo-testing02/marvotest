@@ -8,7 +8,7 @@ const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-20 md:bottom-0 lg:bottom-0 right-11 md:right-6 z-50 md:mb-[85px] md:mr-8">
+    <div className="fixed bottom-20 md:bottom-0 lg:bottom-0 right-6 md:right-6 z-50 md:mb-[85px] md:mr-8">
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -39,19 +39,19 @@ const ChatBot = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute bottom-16 right-0"
+            className="absolute bottom-16 -right-2.5"
           >
             <Paper
               elevation={3}
               sx={{
-                width: "298px",
+                width: { md: '238px', lg: '283px', sm: "283px", xs: "87vw" },
                 maxWidth: "100%",
                 borderRadius: "12px",
                 padding: "16px",
                 position: "relative",
               }}
             >
-              <p className="text-[#1254DC] text-[16px] md:text-sm leading-[24px]">
+              <p className="text-[#1254DC] text-[16px] md:text-sm leading-[24px] ">
                 <strong className="text-[#1254DC]">"Hey! I’m MARVO.</strong>
                 <br />
                 Want Help Automating Your Leads?"

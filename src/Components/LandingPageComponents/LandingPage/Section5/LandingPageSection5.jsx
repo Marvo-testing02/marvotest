@@ -38,10 +38,10 @@ function LandingPageSection5() {
             {/* Cards & Lines Container */}
             <div className="relative w-full flex flex-col items-center justify-center py-24 px-4 bg-white">
                 {/* Horizontal Dashed Line */}
-                <div className="hidden md:block absolute top-[8rem] w-[54rem] max-w-[1000px] border-t-2 border-dashed border-[#007BFF] z-0" />
+                <div className="hidden lg:block absolute top-[8rem] w-[54rem] max-w-[1000px] border-t-2 border-dashed border-[#007BFF] z-0" />
 
                 {/* Vertical Lines */}
-                <div className="hidden md:flex absolute top-[8rem] w-[90rem] max-w-[1150px] justify-between z-0">
+                <div className="hidden  lg:flex  absolute top-[8rem] w-[90rem] max-w-[1150px] justify-between z-0">
                     {items.map((_, idx) => (
                         <div key={idx} className="w-1/4 flex justify-center">
                             <div className="h-32 w-0 border-l-2 border-dashed border-[#007BFF]" />
@@ -60,7 +60,8 @@ function LandingPageSection5() {
                 </motion.div>
 
                 {/* Cards */}
-                <div className="relative flex flex-col md:flex-row gap-10 justify-center items-start z-10">
+                <div className="relative flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-10 justify-center items-start z-10">
+
                     {items.map((item, idx) => (
                         <motion.div
                             key={idx}

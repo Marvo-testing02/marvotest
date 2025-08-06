@@ -46,19 +46,22 @@ function LandingPageSection3() {
                 {/* Numbered items */}
 
 
-                <div className="flex flex-col md:flex-row gap-10 md:gap-20">
+                <div className="grid grid-cols-2 md:flex md:flex-row gap-6 md:gap-20">
                     {["AI Chatbot", "Automation", "CRM", "Campaigns"].map((title, index) => (
                         <div key={index} className="flex flex-row items-end gap-2">
                             <p
                                 style={{ WebkitTextStroke: "1px #1646B7", color: "transparent" }}
-                                className="text-4xl md:text-6xl font-bold text-transparent"
+                                className="text-3xl sm:text-4xl md:text-6xl font-bold text-transparent"
                             >
                                 {index + 1}
                             </p>
-                            <h2 className="text-xl md:text-3xl font-bold text-[#1646B7]">{title}</h2>
+                            <h2 className="text-base sm:text-xl md:text-3xl font-bold text-[#1646B7]">
+                                {title}
+                            </h2>
                         </div>
                     ))}
                 </div>
+
 
 
                 {/* Scrollable Image Section */}
