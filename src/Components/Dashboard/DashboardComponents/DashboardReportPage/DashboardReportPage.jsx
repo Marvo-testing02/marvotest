@@ -30,6 +30,8 @@ function DashboardReportPage() {
         { label: "Conversion Rate", value: "11.6%", change: 0 },
         { label: "Avg Response Time", value: "1 hr 20 mins", change: 0 },
     ];
+    const [filteredData, setFilteredData] = useState(mockData);
+
     const filterData = () => {
         const filtered = mockData.filter(item =>
             item.name.toLowerCase().includes(search.toLowerCase()) &&
@@ -39,8 +41,9 @@ function DashboardReportPage() {
             (exportType ? item.exportType === exportType : true) &&
             (smartReportType ? item.smartReportType === smartReportType : true)
         );
-        console.log("Filtered Data:", filtered);
+        setFilteredData(filtered);
     };
+
 
     useEffect(() => {
         filterData();
@@ -120,6 +123,8 @@ function DashboardReportPage() {
         { name: "Campaign Delta", channel: "Facebook", sent: 220, replies: 55, ctr: "25%", conversion: "12%", status: "Completed" },
         { name: "Campaign Epsilon", channel: "WhatsApp", sent: 300, replies: 60, ctr: "20%", conversion: "10%", status: "Active" },
     ];
+
+
     return (
         <div className=' mt-10 w-full flex flex-col '>
             {/* Search Input */}
@@ -157,76 +162,82 @@ function DashboardReportPage() {
                     display: "flex",
                     flexDirection: 'row',
                     gap: 1.5,
+                    justifyContent: 'space-between',
                     mb: 2,
                     width: "100%",
                     flexWrap: "wrap",
                 }}
             >
-                {filters.map((filter, index) => (
-                    <FormControl size="small" key={index} sx={{ minWidth: 140 }}>
-                        <Select
-                            displayEmpty
-                            value={filter.value}
-                            onChange={(e) => filter.setValue(e.target.value)}
-                            IconComponent={KeyboardArrowDownIcon}
-                            renderValue={(selected) =>
-                                selected === "" ? (
-                                    <span style={{ color: "#000000", backgroundColor: "#EBEDF2" }}>
-                                        {filter.label}
-                                    </span>
-                                ) : (
-                                    selected
-                                )
-                            }
-                            sx={{
-                                color: "#000000",
-                                pl: "16px",
-                                pr: "8px",
-                                borderRadius: "12px",
-                                backgroundColor: "#EBEDF2",
-                                fontSize: "14px",
-                                fontWeight: 500,
-                                "& .MuiSelect-select": { py: 0.8, pl: 2 },
-                                "& fieldset": { border: "none" },
-                            }}
-                        >
-                            {filter.options.map((opt) => (
-                                <MenuItem
-                                    key={opt}
-                                    value={opt}
-                                    sx={{
-                                        color: "#000000",
-                                        fontSize: "13px",
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    {opt}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                ))}
-            </Box>
+                <div className='flex flex-row flex-wrap  gap-2'>
+                    {filters.map((filter, index) => (
+                        <FormControl size="small" key={index} sx={{ minWidth: 140 }}>
+                            <Select
+                                displayEmpty
+                                value={filter.value}
+                                onChange={(e) => filter.setValue(e.target.value)}
+                                IconComponent={KeyboardArrowDownIcon}
+                                renderValue={(selected) =>
+                                    selected === "" ? (
+                                        <span style={{ color: "#000000", backgroundColor: "#EBEDF2" }}>
+                                            {filter.label}
+                                        </span>
+                                    ) : (
+                                        selected
+                                    )
+                                }
+                                sx={{
+                                    color: "#000000",
+                                    pl: "16px",
+                                    pr: "8px",
+                                    borderRadius: "12px",
+                                    backgroundColor: "#EBEDF2",
+                                    fontSize: "14px",
+                                    fontWeight: 500,
+                                    "& .MuiSelect-select": { py: 0.8, pl: 2 },
+                                    "& fieldset": { border: "none" },
+                                }}
+                            >
+                                {filter.options.map((opt) => (
+                                    <MenuItem
+                                        key={opt}
+                                        value={opt}
+                                        sx={{
+                                            color: "#000000",
+                                            fontSize: "13px",
+                                            fontWeight: 500,
+                                        }}
+                                    >
+                                        {opt}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    ))}
+                </div>
 
-            {/* Clear All Filters Button */}
-            {/* <Box sx={{ width: "80%", mb: 2 }}>
+
                 <Button
                     onClick={handleClearFilters}
-                    variant="outlined"
-                    color="error"
-                    size="small"
                     startIcon={<ClearIcon />}
                     sx={{
-                        textTransform: "none",
+                       
+                        pl: "16px",
+                        pr: "16px",
+                        borderRadius: "12px",
+                        backgroundColor: "#EBEDF2",
+                        color: "#000000",
+                        fontSize: "14px",
                         fontWeight: 500,
-                        borderRadius: "8px",
-                        fontSize: "13px"
+                        textTransform: "none",
+                        "&:hover": {
+                            backgroundColor: "#d6dce5",
+                        },
                     }}
                 >
                     Clear All Filters
                 </Button>
-            </Box> */}
 
+            </Box>
 
             {/* box data */}
 
@@ -389,7 +400,7 @@ function DashboardReportPage() {
                     borderRadius: "12px",
                     boxShadow: "none",
                     mt: 2,
-                    mb:2
+                    mb: 2
                 }}
             >
                 <Table
@@ -416,7 +427,7 @@ function DashboardReportPage() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {campaignTableData.map((row, idx) => (
+                        {/* {campaignTableData.map((row, idx) => (
                             <TableRow key={idx}>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>
@@ -439,7 +450,25 @@ function DashboardReportPage() {
                                     <span className=' text-[#5C758A] font-semibold'> View</span>
                                 </TableCell>
                             </TableRow>
+                        ))} */}
+
+                        {filteredData.map((item, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{item.channel}</TableCell>
+                                <TableCell>{item.tags}</TableCell>
+                                <TableCell>{item.dateRange}</TableCell>
+                                <TableCell>{item.exportType}</TableCell>
+                                <TableCell>{item.smartReportType}</TableCell>
+                                <TableCell>
+                                    <span className="text-[#5C758A] font-semibold">View</span>
+                                </TableCell>
+                                <TableCell>
+                                    <span className="text-[#5C758A] font-semibold"></span>
+                                </TableCell>
+                            </TableRow>
                         ))}
+
                     </TableBody>
                 </Table>
             </TableContainer>
