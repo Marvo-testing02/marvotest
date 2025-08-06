@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Button, TextField } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -9,12 +8,11 @@ import dottedLine from '../../assets/Ways/ThreeWay.svg';
 import sideIllustration from '../../assets/illustrations/invite.svg';
 import '../../App.css';
 
-const EnterprisePage3 = () => {
+const EnterprisePage3 = ({goToNext}) => {
     const [goal1, setGoal1] = useState('');
     const [goal2, setGoal2] = useState('');
     const [goal3, setGoal3] = useState('');
     const [skipped, setSkipped] = useState(false);
-    const navigate = useNavigate();
     const handleSkip = () => {
         setSkipped(true);
         setTimeout(() => {
@@ -22,8 +20,9 @@ const EnterprisePage3 = () => {
         }, 1000);
     };
     const goToNextStep = () => {
-        navigate('/enterprise/page4');
-    };
+        goToNext();
+    }
+  
     return (
 
         <Box

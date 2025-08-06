@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Box, Typography, Radio, RadioGroup, FormControlLabel, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -9,12 +9,10 @@ import dottedLine from '../../assets/Ways/TwoWay.svg';
 import sideIllustration from '../../assets/illustrations/completedSteps.svg';
 import '../../App.css';
 
-const BusinessPage2 = () => {
+const BusinessPage2 = ({goToNext}) => {
     const [goal, setGoal] = useState('');
     const [skipped, setSkipped] = useState(false);
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation();
 
     const handleSkip = () => {
         setSkipped(true);
@@ -31,7 +29,8 @@ const BusinessPage2 = () => {
             return;
         }
         setError(false);
-        navigate('/business/page3');
+        goToNext();
+ 
     };
 
     return (

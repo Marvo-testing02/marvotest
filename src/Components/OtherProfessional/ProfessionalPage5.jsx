@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Radio, RadioGroup, FormControlLabel, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import bgImage from '../../assets/background/backgroundRole.png';
@@ -8,12 +7,11 @@ import plane from '../../assets/effects/plane.png';
 import dottedLine from '../../assets/Ways/FiveWay.svg';
 import '../../App.css';
 
-const ProfessionalPage5 = () => {
+const ProfessionalPage5 = ({goToNext}) => {
     const [clientType, setClientType] = useState('');
     const [skipped, setSkipped] = useState(false);
     const [error, setError] = useState(false);
 
-    const navigate = useNavigate();
 
     const handleSkip = () => {
         setSkipped(true);
@@ -28,7 +26,8 @@ const ProfessionalPage5 = () => {
             return;
         }
         setError(false);
-        navigate('/otherprofessional/page6');
+        goToNext();
+        
     };
 
     return (
