@@ -297,24 +297,31 @@ function DashboardOverviewPage() {
             </Box> */}
 
             <Box className="mt-10 bg-[#F1F8FF] w-full px-4 py-6 rounded-lg">
-                <Typography sx={{ fontSize: '22px', fontWeight: 700 }} className="mb-2">
+                <Typography
+                    sx={{ fontSize: { xs: '18px', sm: '20px', md: '22px' }, fontWeight: 700 }}
+                    className="mb-2 text-center md:text-left"
+                >
                     Most Engaged Campaign Types
                 </Typography>
-                <Typography sx={{ fontSize: 18, mt: 2 }} className="text-sm text-black font-bold mb-4">
+
+                <Typography
+                    sx={{ fontSize: { xs: 16, sm: 17, md: 18 }, mt: 2 }}
+                    className="text-sm text-black font-bold mb-4 text-center md:text-left"
+                >
                     Campaign Engagement
                 </Typography>
 
-                <div className="w-full h-[320px] md:h-[400px]">
-                    <ResponsiveContainer style={{ outline: 'none' }} width="100%" height="100%">
+                <div className="w-full h-[300px] sm:h-[340px] md:h-[400px]">
+                    <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                             <Pie
                                 data={campaignEngagementData}
-                                cx="20%"
+                                cx="50%"
                                 cy="50%"
                                 labelLine={false}
                                 label={renderCustomizedLabel}
-                                outerRadius={170}
-                                innerRadius={70}
+                                outerRadius="100%"
+                                innerRadius="40%"
                                 dataKey="engagement"
                             >
                                 {campaignEngagementData.map((entry, index) => (
@@ -331,12 +338,16 @@ function DashboardOverviewPage() {
                                 }}
                             />
                             <Legend
-
-                                layout="vertical"
-                                align="left"
+                                layout="horizontal"
+                                align="center"
                                 verticalAlign="bottom"
                                 iconType="circle"
-                                wrapperStyle={{ fontSize: 14, fontWeight: 500, }}
+                                wrapperStyle={{
+                                    fontSize: 12,
+                                    fontWeight: 500,
+                                    paddingTop: '10px',
+                                    textAlign: 'center',
+                                }}
                             />
                         </PieChart>
                     </ResponsiveContainer>

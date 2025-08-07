@@ -89,6 +89,22 @@ function DashboardMyTaskPage() {
         return true;
     });
 
+    const buttonStyle = {
+        color: "#000000",
+        pl: "8px",
+        pr: "8px",
+        borderRadius: "12px",
+        backgroundColor: "#EBEDF2",
+        fontSize: "14px",
+        fontWeight: 500,
+        textTransform: "none",
+        py: 0.5,
+        border: "none",
+        "&:hover": {
+            backgroundColor: "#dce0e8",
+        },
+    };
+
     return (
         <Box className="mt-4 bg-[#f5faff] min-h-screen px-2 sm:px-6">
             {/* Tabs */}
@@ -127,31 +143,20 @@ function DashboardMyTaskPage() {
             </Tabs>
 
             {/* Filter Buttons */}
-            <Box className="flex flex-wrap gap-0 lg:gap-0 md:gap-0 mb-6">
+            <Box className="flex flex-wrap gap-3 lg:gap-3 md:gap-3 mb-6">
                 {["All", "Due Today", "Overdue", "Completed"].map((label, idx) => (
                     <Button
                         key={label}
                         onClick={() => setFilterStatus(label)}
                         variant="outlined"
-                        sx={{
-                            border: '1px solid #CFDBE8',
-                            color: filterStatus === label ? 'black' : 'gray',
-                            backgroundColor: filterStatus === label ? 'white' : 'transparent',
-                            borderRadius:
-                                idx === 0
-                                    ? '9px 0 0 9px'
-                                    : idx === 3
-                                        ? '0 9px 9px 0'
-                                        : '0px',
-                            padding: '6px 12px',
-                        }}
+                        sx={{ ...buttonStyle }}
                     >
                         {label}
                     </Button>
                 ))}
             </Box>
 
-            
+
 
             {/* Task Table */}
             <TableContainer
@@ -193,16 +198,18 @@ function DashboardMyTaskPage() {
                                 <TableCell sx={{ color: '#5C738A' }}>{task.type}</TableCell>
                                 <TableCell sx={{ color: '#5C738A' }}>{task.channel}</TableCell>
                                 <TableCell>
-                                    <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs sm:text-sm">
+                                    <span className="bg-gray-100 text-gray-800 px-2 py-2 rounded-full text-xs sm:text-sm">
                                         {task.status}
                                     </span>
                                 </TableCell>
                                 <TableCell sx={{ color: '#5C738A' }}>{task.date}</TableCell>
-                                <TableCell>
-                                    <span className="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-xs sm:text-sm">
+                                <TableCell sx={{ width: 'auto', whiteSpace: 'nowrap' }}>
+                                    <span className="bg-gray-200 text-gray-800 px-2 py-2 rounded-full text-xs sm:text-sm max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
                                         {task.tag}
                                     </span>
+
                                 </TableCell>
+
                             </TableRow>
                         ))}
                     </TableBody>
