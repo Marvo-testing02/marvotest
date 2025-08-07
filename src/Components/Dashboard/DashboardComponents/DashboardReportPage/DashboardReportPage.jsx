@@ -6,20 +6,53 @@ import ClearIcon from '@mui/icons-material/Clear';
 import {
     BarChart, Bar, XAxis, YAxis, ResponsiveContainer,
 } from "recharts";
+import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { Popover } from '@mui/material';
+import { format } from 'date-fns';
+import dayjs from 'dayjs';
 
 
 function DashboardReportPage() {
     const [search, setSearch] = useState("");
     const [channel, setChannel] = useState("");
-    const [dateRange, setDateRange] = useState("");
+    // const [dateRange, setDateRange] = useState("");
     const [tags, setTags] = useState("");
     const [exportType, setExportType] = useState("");
     const [smartReportType, setSmartReportType] = useState("");
+    const [dateRange, setDateRange] = useState([
+        {
+            startDate: null,
+            endDate: null,
+            key: 'selection',
+        }
+    ]);
 
+
+
+    const [anchorEl, setAnchorEl] = useState(null);
     const mockData = [
-        { name: "Campaign A", channel: "Facebook", tags: "Fitness", dateRange: "Today", exportType: "PDF", smartReportType: "Summary" },
-        { name: "Campaign B", channel: "Instagram", tags: "eCom", dateRange: "This Week", exportType: "CSV", smartReportType: "Detailed" },
-        { name: "Campaign C", channel: "WhatsApp", tags: "VIP", dateRange: "Last Month", exportType: "Excel", smartReportType: "Summary" },
+        { name: "Campaign A", channel: "Facebook", tags: "Fitness", date: "2025-08-01", exportType: "PDF", smartReportType: "Summary" },
+        { name: "Campaign B", channel: "Instagram", tags: "eCom", date: "2025-08-03", exportType: "CSV", smartReportType: "Detailed" },
+        { name: "Campaign C", channel: "WhatsApp", tags: "VIP", date: "2025-07-25", exportType: "Excel", smartReportType: "Summary" },
+        { name: "Campaign D", channel: "Email", tags: "Warm", date: "2025-08-05", exportType: "PDF", smartReportType: "Detailed" },
+        { name: "Campaign E", channel: "Facebook", tags: "Cold", date: "2025-07-29", exportType: "CSV", smartReportType: "Summary" },
+        { name: "Campaign F", channel: "Instagram", tags: "VIP", date: "2025-08-06", exportType: "Excel", smartReportType: "Detailed" },
+        { name: "Campaign G", channel: "WhatsApp", tags: "Fitness", date: "2025-08-02", exportType: "PDF", smartReportType: "Summary" },
+        { name: "Campaign H", channel: "Email", tags: "eCom", date: "2025-08-04", exportType: "CSV", smartReportType: "Detailed" },
+        { name: "Campaign I", channel: "Facebook", tags: "VIP", date: "2025-07-30", exportType: "Excel", smartReportType: "Summary" },
+        { name: "Campaign J", channel: "Instagram", tags: "Warm", date: "2025-08-07", exportType: "PDF", smartReportType: "Detailed" },
+        { name: "Campaign K", channel: "WhatsApp", tags: "Cold", date: "2025-08-01", exportType: "CSV", smartReportType: "Summary" },
+        { name: "Campaign L", channel: "Email", tags: "VIP", date: "2025-07-26", exportType: "Excel", smartReportType: "Detailed" },
+        { name: "Campaign M", channel: "Facebook", tags: "Fitness", date: "2025-07-27", exportType: "PDF", smartReportType: "Summary" },
+        { name: "Campaign N", channel: "Instagram", tags: "eCom", date: "2025-08-05", exportType: "CSV", smartReportType: "Detailed" },
+        { name: "Campaign O", channel: "WhatsApp", tags: "Warm", date: "2025-08-03", exportType: "Excel", smartReportType: "Summary" },
+        { name: "Campaign P", channel: "Email", tags: "Cold", date: "2025-07-31", exportType: "PDF", smartReportType: "Detailed" },
+        { name: "Campaign Q", channel: "Facebook", tags: "VIP", date: "2025-08-06", exportType: "CSV", smartReportType: "Summary" },
+        { name: "Campaign R", channel: "Instagram", tags: "Fitness", date: "2025-08-07", exportType: "Excel", smartReportType: "Detailed" },
+        { name: "Campaign S", channel: "WhatsApp", tags: "eCom", date: "2025-07-28", exportType: "PDF", smartReportType: "Summary" },
+        { name: "Campaign T", channel: "Email", tags: "Warm", date: "2025-08-02", exportType: "CSV", smartReportType: "Detailed" },
     ];
 
     const data = [
@@ -36,13 +69,18 @@ function DashboardReportPage() {
         const filtered = mockData.filter(item =>
             item.name.toLowerCase().includes(search.toLowerCase()) &&
             (channel ? item.channel === channel : true) &&
-            (dateRange ? item.dateRange === dateRange : true) &&
+            (dateRange[0].startDate && dateRange[0].endDate
+                ? dayjs(item.date).isAfter(dayjs(dateRange[0].startDate).subtract(1, 'day')) &&
+                dayjs(item.date).isBefore(dayjs(dateRange[0].endDate).add(1, 'day'))
+                : true) &&
             (tags ? item.tags === tags : true) &&
             (exportType ? item.exportType === exportType : true) &&
             (smartReportType ? item.smartReportType === smartReportType : true)
         );
+
         setFilteredData(filtered);
     };
+
 
 
     useEffect(() => {
@@ -52,30 +90,32 @@ function DashboardReportPage() {
     const handleClearFilters = () => {
         setSearch("");
         setChannel("");
-        setDateRange("");
+        setDateRange([
+            {
+                startDate: null,
+                endDate: null,
+                key: 'selection',
+            }
+        ]);
         setTags("");
         setExportType("");
         setSmartReportType("");
     };
+
 
     const filters = [
         {
             label: "Channel",
             value: channel,
             setValue: setChannel,
-            options: ["Facebook", "WhatsApp", "Instagram"],
+            options: ["Facebook", "WhatsApp", "Email", "Instagram"],
         },
-        {
-            label: "Date Range",
-            value: dateRange,
-            setValue: setDateRange,
-            options: ["Today", "This Week", "Last Month"],
-        },
+
         {
             label: "Tags",
             value: tags,
             setValue: setTags,
-            options: ["VIP", "eCom", "Fitness"],
+            options: ["Warm", "Cold",],
         },
         {
             label: "Export",
@@ -124,7 +164,15 @@ function DashboardReportPage() {
         { name: "Campaign Epsilon", channel: "WhatsApp", sent: 300, replies: 60, ctr: "20%", conversion: "10%", status: "Active" },
     ];
 
+    const handleDateClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
     return (
         <div className=' mt-10 w-full flex flex-col '>
             {/* Search Input */}
@@ -169,6 +217,45 @@ function DashboardReportPage() {
                 }}
             >
                 <div className='flex flex-row flex-wrap  gap-2'>
+
+                    <Button
+                        onClick={handleDateClick}
+                        sx={{
+                            minWidth: 140,
+                            borderRadius: '12px',
+                            backgroundColor: "#EBEDF2",
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            textTransform: "none",
+                            color: "#000",
+                            padding: "6px 16px",
+                        }}
+                    >
+                        {(dateRange[0].startDate && dateRange[0].endDate)
+                            ? `${format(dateRange[0].startDate, 'dd/MM/yyyy')} - ${format(dateRange[0].endDate, 'dd/MM/yyyy')}`
+                            : "Select Date Range"}
+                    </Button>
+
+                    <Popover
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                    >
+                        <DateRange
+                            editableDateInputs={true}
+                            onChange={item => {
+                                setDateRange([item.selection]);
+                                handleClose();
+                            }}
+                            moveRangeOnFirstSelection={false}
+                            ranges={dateRange}
+                        />
+                    </Popover>
+
                     {filters.map((filter, index) => (
                         <FormControl size="small" key={index} sx={{ minWidth: 140 }}>
                             <Select
@@ -196,6 +283,17 @@ function DashboardReportPage() {
                                     "& .MuiSelect-select": { py: 0.8, pl: 2 },
                                     "& fieldset": { border: "none" },
                                 }}
+
+                                MenuProps={{
+                                    PaperProps: {
+                                        sx: {
+                                            borderRadius: "12px",
+                                            overflow: "hidden",
+                                            marginTop: '10px',
+                                            fontWeight: 500
+                                        },
+                                    },
+                                }}
                             >
                                 {filter.options.map((opt) => (
                                     <MenuItem
@@ -205,6 +303,8 @@ function DashboardReportPage() {
                                             color: "#000000",
                                             fontSize: "13px",
                                             fontWeight: 500,
+                                            borderRadius: "8px",
+
                                         }}
                                     >
                                         {opt}
@@ -220,7 +320,7 @@ function DashboardReportPage() {
                     onClick={handleClearFilters}
                     startIcon={<ClearIcon />}
                     sx={{
-                       
+
                         pl: "16px",
                         pr: "16px",
                         borderRadius: "12px",
