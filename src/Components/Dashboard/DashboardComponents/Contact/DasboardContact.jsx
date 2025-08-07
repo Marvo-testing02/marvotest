@@ -15,10 +15,11 @@ import {
   MenuItem,
   FormControl,
   InputAdornment,
+  Button,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchIcon from "@mui/icons-material/Search";
-
+import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 // Dummy dynamic data
 const contacts = [
   {
@@ -133,6 +134,18 @@ function DashboardContact() {
   const [lastActivity, setLastActivity] = useState("");
   const [search, setSearch] = useState("");
 
+  // CSV Upload State
+  const [csvFileName, setCsvFileName] = useState("");
+
+  const handleCsvUpload = (e) => {
+    const file = e.target.files[0];
+    if (file && file.name.endsWith(".csv")) {
+      setCsvFileName(file.name);
+    } else {
+      setCsvFileName("");
+      alert("Please upload a valid .csv file");
+    }
+  };
   const filteredContacts = contacts
     .filter((contact) => {
       const searchTerm = search.toLowerCase();
@@ -287,7 +300,65 @@ function DashboardContact() {
           </FormControl>
         ))}
       </Box>
-
+      {/* CSV Upload Section */}
+      <Box className="flex justify-center items-center mb-6">
+        <Paper
+          sx={{
+            background: "#F3F3F3",
+            width: "100%",
+            maxWidth: "757px",
+            border: "2px solid #CFDBE8",
+            borderRadius: "12px",
+            boxShadow: "none",
+          }}
+          className="p-4 relative h-[206px] flex flex-col justify-center items-center"
+        >
+          <input
+            type="file"
+            accept=".csv"
+            onChange={handleCsvUpload}
+            id="csvInput"
+            hidden
+          />
+          <label htmlFor="csvInput">
+            <Button
+              component="span"
+              sx={{
+                background: "#EEFFF4",
+                border: "2px solid #CBD6CF",
+                borderRadius: "10px",
+                fontSize: "16px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "gray",
+                fontWeight: 600,
+                px: 3,
+                py: 1,
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.22)",
+              }}
+              endIcon={<ArrowDropDown className="text-black" />}
+            >
+              Import CSV
+            </Button>
+          </label>
+          <Typography
+            sx={{
+              fontSize: "14px",
+              color: "#888",
+              mt: 3,
+              textAlign: "center",
+            }}
+          >
+            Drag and drop file here or paste here
+          </Typography>
+          {csvFileName && (
+            <Typography sx={{ mt: 1, color: "#001D6C", fontSize: "14px" }}>
+              Selected file: {csvFileName}
+            </Typography>
+          )}
+        </Paper>
+      </Box>
       {/* Sort by Section */}
       <Box
         sx={{
