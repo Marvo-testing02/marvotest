@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
     Box,
-    Typography,
     Paper,
     Button,
     Tabs,
@@ -15,7 +14,7 @@ import {
     useMediaQuery,
     useTheme,
 } from '@mui/material';
-import { ArrowDropDown } from '@mui/icons-material';
+
 
 const taskData = [
     {
@@ -78,18 +77,7 @@ function DashboardMyTaskPage() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-    const [csvFileName, setCsvFileName] = useState('');
     const [filterStatus, setFilterStatus] = useState('All');
-
-    const handleCsvUpload = (e) => {
-        const file = e.target.files[0];
-        if (file && file.type === 'text/csv') {
-            setCsvFileName(file.name);
-            // Add your CSV logic here
-        } else {
-            alert("Please upload a valid CSV file.");
-        }
-    };
 
     const today = new Date().toISOString().split("T")[0];
 
@@ -163,59 +151,7 @@ function DashboardMyTaskPage() {
                 ))}
             </Box>
 
-            {/* CSV Upload Section */}
-            <Box className="flex justify-center items-center mb-6">
-                <Paper
-                    sx={{
-                        background: '#F3F3F3',
-                        width: '100%',
-                        maxWidth: '757px',
-                        border: '2px solid #CFDBE8',
-                        borderRadius: '12px',
-                        boxShadow: 'none',
-                    }}
-                    className="p-4 relative h-[206px] flex flex-col justify-center items-center"
-                >
-                    <input
-                        type="file"
-                        accept=".csv"
-                        onChange={handleCsvUpload}
-                        id="csvInput"
-                        hidden
-                    />
-                    <label htmlFor="csvInput">
-                        <Button
-                            component="span"
-                            sx={{
-                                background: '#EEFFF4',
-                                fontSize: '16px',
-                                color: 'gray',
-                                fontWeight: 600,
-                                px: 3,
-                                py: 1.5,
-                            }}
-                            endIcon={<ArrowDropDown className="text-black" />}
-                        >
-                            Import CSV
-                        </Button>
-                    </label>
-                    <Typography
-                        sx={{
-                            fontSize: '14px',
-                            color: '#888',
-                            mt: 2,
-                            textAlign: 'center',
-                        }}
-                    >
-                        Drag and drop file here or paste here
-                    </Typography>
-                    {csvFileName && (
-                        <Typography sx={{ mt: 1, color: '#001D6C', fontSize: '14px' }}>
-                            Selected file: {csvFileName}
-                        </Typography>
-                    )}
-                </Paper>
-            </Box>
+            
 
             {/* Task Table */}
             <TableContainer
